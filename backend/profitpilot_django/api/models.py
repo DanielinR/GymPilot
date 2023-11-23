@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
+
 # Create your models here.
 class Exercise(models.Model):
     id = models.AutoField(primary_key=True)
@@ -10,6 +11,7 @@ class Exercise(models.Model):
 
     class Meta:
         unique_together = ('name', 'user',)
+
 
 class TrainingTemplate(models.Model):
     id = models.AutoField(primary_key=True)
@@ -20,11 +22,13 @@ class TrainingTemplate(models.Model):
     class Meta:
         unique_together = ('name', 'user',)
 
+
 class Training(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='trainings')
     trainingTemplate = models.ForeignKey(TrainingTemplate, on_delete=models.SET_NULL, null=True, blank=True, related_name='trainings')
     date = models.DateTimeField(auto_now_add=True)
+
 
 class Set(models.Model):
     id = models.AutoField(primary_key=True)
