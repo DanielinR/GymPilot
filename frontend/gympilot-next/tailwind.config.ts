@@ -16,6 +16,7 @@ const config: Config = {
       colors:{
         'color-primary' : '#393E46',
         'color-secondary' : '#00ADB5',
+        'color-secondary-dark' : '#008C93',
         'color-font' : 'white',
         'color-primary-strong' : '#222831',
         'color-info-back' : '#EEEEEE',
