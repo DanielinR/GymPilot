@@ -5,7 +5,14 @@ from . import models
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Exercise
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'type']
+
+
+class ExerciseTypeSerializer(serializers.ModelSerializer):
+    exercises = ExerciseSerializer(many=True, read_only=True)
+    class Meta:
+        model = models.ExerciseType
+        fields = ['id', 'name', 'exercises']
 
 
 class TrainingTemplateSerializer(serializers.ModelSerializer):

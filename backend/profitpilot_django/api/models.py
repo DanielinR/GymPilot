@@ -4,9 +4,19 @@ from django.core.validators import MinValueValidator
 
 
 # Create your models here.
+class ExerciseType(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='exerciseTypes')
+    name = models.CharField(max_length=100)
+
+    class Meta:
+        unique_together = ('name', 'user',)
+
+
 class Exercise(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='exercises')
+    type = models.ForeignKey(ExerciseType, on_delete=models.SET_NULL, null=True, blank=True, related_name='exercises')
     name = models.CharField(max_length=100)
 
     class Meta:
