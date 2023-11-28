@@ -1,0 +1,22 @@
+/* Estilizando la barra de desplazamiento en sí */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Estilizando el rastro del scrollbar (la parte donde se desplaza el thumb) */
+::-webkit-scrollbar-track {
+    width: 20px;
+    background: white; /* Color de fondo */
+    border-radius: 8px;
+}
+
+/* Estilizando el thumb del scrollbar (la parte que se mueve) */
+::-webkit-scrollbar-thumb {
+    background: #00ADB5; /* Color del thumb */
+    border-radius: 8px;
+}
+
+/* Cambio de color al pasar el ratón */
+::-webkit-scrollbar-thumb:hover {
+    background: #008C93; /* Color del thumb al pasar el ratón */
+}

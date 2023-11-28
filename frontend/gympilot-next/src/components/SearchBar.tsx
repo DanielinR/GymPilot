@@ -1,9 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
-export default function SearchBar() {
+const WAIT_BETWEEN_SEARCHES = 222;
+
+export default function SearchBar({ placeholder }: { placeholder?: string }) {
   const [isFocused, setIsFocused] = useState(false);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleSearch= useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(searchParams);
+    
+    if (term) {
+      params.set("search", term);
+    } else {
+      params.delete("search");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }, WAIT_BETWEEN_SEARCHES)
 
   return (
     <div
@@ -12,9 +30,14 @@ export default function SearchBar() {
       } outline-color-secondary`}
     >
       <input
+        onChange={(event) => {
+          handleSearch(event.target.value);
+        }}
         className="flex-1 bg-color-info-back focus:outline-none ml-4"
         onBlur={() => setIsFocused(false)}
         onFocus={() => setIsFocused(true)}
+        placeholder={placeholder ? placeholder : ""}
+        defaultValue={searchParams.get("search")?.toString()}
       ></input>
       <button className="bg-color-secondary hover:bg-color-secondary-dark p-2 h-full rounded-e-md w-12 flex items-center justify-center">
         <svg

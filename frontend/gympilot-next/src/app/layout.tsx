@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={'${inter.className} antialiased'}>
         <div className='z-0 flex h-screen w-screen overflow-hidden'>
           <Navbar></Navbar>
-          <main className='bg-color-primary relative h-full w-full flex-1 overflow-auto transition-width'>
+          <main className='bg-color-primary relative h-screen w-full flex-1 overflow-auto transition-width'>
             {children}
           </main>
         </div>

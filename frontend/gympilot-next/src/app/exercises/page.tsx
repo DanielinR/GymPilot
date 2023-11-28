@@ -2,16 +2,15 @@
 
 import List from "@/components/list/List";
 import ListElement from "@/components/list/ListElement";
-import { type } from "os";
 
 export default function exercisesPage() {
 
-  type Exercise = {
+  type ExerciseType = {
     id: number,
     name: string;
   };
-
+  
   return (
-    <List<Exercise> tittle="Exercises" url="/exerciseTypes" render={ListElement}></List>
+    <List<ExerciseType> tittle="Exercise types" url="/exerciseTypes" searchBy="name" render={ListElement}></List>
   );
 }

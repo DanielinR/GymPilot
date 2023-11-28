@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import path from "path";
 
-export default function ListElement({ id, name }: { id:number, name: string }, url:string) {
+export default function ListElement({ id, name }: { id:number, name: string }) {
   const pathname = usePathname();  
   
   return (
