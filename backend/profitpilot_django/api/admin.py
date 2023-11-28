@@ -15,6 +15,7 @@ class TrainingTemplateAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.TrainingTemplate, TrainingTemplateAdmin)
+admin.site.register(models.ExerciseType)
 admin.site.register(models.Set)
 admin.site.register(models.Exercise)
 admin.site.register(models.Training)
