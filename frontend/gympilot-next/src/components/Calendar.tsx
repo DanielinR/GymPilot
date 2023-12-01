@@ -51,7 +51,7 @@ function Calendar() {
               <CalendarDay 
                   key={index + 1} 
                   day={index + 1} 
-                  trained={trainedDays.includes(index + 1)}
+                  trained={trainedDays ? trainedDays.includes(index + 1) : false}
                   exist={index < daysInMonth} 
               />
           ))}

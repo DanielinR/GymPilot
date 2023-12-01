@@ -1,6 +1,18 @@
+"use client";
+
+import { logout } from "@/libs/data";
+
 export default function LogoutButton() {
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <button>
+    <button onClick={handleLogout}>
       <svg
         className="bg-color-primary h-12 w-12 rounded-full p-2 hover:bg-color-primary-strong text-color-font hover:outline outline-color-primary outline-1 shadow-sm"
         fill="none"

@@ -1,10 +1,24 @@
-const url = "http://localhost:8000";
+const url = "http://localhost:8000/api";
 
-export async function getJsonFromAPI(dir: string, param?: string, search?: string, searchBy?:string) {
-  const response = await fetch(url + "/api/v1" + dir + "/");
+export async function getJsonFromAPI(
+  dir: string,
+  param?: string,
+  search?: string,
+  searchBy?: string
+) {
+  const response = await fetch(url + "/v1" + dir + "/", {
+      method: 'GET',
+      headers: {
+          'Authorization': `Token ${localStorage.getItem('token')}`
+      }
+  });
   const data = await response.json();
   const dataParam = param ? data[param] : data;
-  return (search && searchBy)? dataParam.filter((item:any) => item[searchBy].toLowerCase().includes(search.toLowerCase())) : dataParam
+  return search && searchBy
+    ? dataParam.filter((item: any) =>
+        item[searchBy].toLowerCase().includes(search.toLowerCase())
+      )
+    : dataParam;
 }
 
 export async function getMonthTrainings(
@@ -12,16 +26,52 @@ export async function getMonthTrainings(
   year: number
 ): Promise<number[]> {
   const response = await fetch(
-    url + `/api/v1/monthTrainedDays/${month}/${year}/`
-  );
+    url + `/v1/monthTrainedDays/${month}/${year}/`
+    , {
+      method: 'GET',
+      headers: {
+          'Authorization': `Token ${localStorage.getItem('token')}`
+      }
+  });
   const data: Promise<{ days_trained: number[] }> = response.json();
   return (await data).days_trained;
 }
 
-// export async function getExercisesFromType(typeId: number) {
-//   const response = await fetch(
-//     url + `/api/v1/exerciseTypes/${typeId}/`
-//   );
-//   const data = await response.json();
-//   return data;
-// }
+type Credentials = {
+  username: string;
+  password: string;
+};
+
+export const login = async (credentials: Credentials) => {
+  const response = await fetch(url + "/rest-auth/login/", {
+    method: "POST",
+    credentials: 'omit',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+
+  if (!response.ok) {
+    throw new Error("Login error");
+  }
+
+  const data = await response.json();
+  localStorage.setItem("token", data.key);
+};
+
+export const logout = async (): Promise<void> => {
+  const response = await fetch(url + "/rest-auth/logout/", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Token ' + localStorage.getItem('token'),
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Logout error");
+  }
+
+  localStorage.removeItem("token");
+};

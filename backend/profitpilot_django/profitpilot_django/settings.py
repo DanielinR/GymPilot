@@ -36,6 +36,8 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', ]
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework.authtoken',
+    'dj_rest_auth',
     'corsheaders',
     'api',
     'rest_framework',
@@ -46,6 +48,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -3,10 +3,14 @@
 import { useState } from "react";
 
 export default function LoginInput({
+  setValue,
   tittle,
+  type = "",
   svgPath,
 }: {
+  setValue: Function;
   tittle: string;
+  type?: string;
   svgPath: string;
 }){
   const [isFocused, setisFocused] = useState(false);
@@ -45,6 +49,11 @@ export default function LoginInput({
                 : "text-color-primary"
             }`}>{isFocused ? tittle : ""}</span>
             <input
+              type={type}
+              required
+              onChange={(event) => {
+                setValue(event.target.value);
+              }}
               onBlur={() => setisFocused(false)}
               onFocus={() => setisFocused(true)}
               placeholder={isFocused ? "" : tittle}
