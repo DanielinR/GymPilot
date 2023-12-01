@@ -11,20 +11,27 @@ export default function List<T extends { id: number }>({
   jsonParam,
   searchBy,
   render,
+  functionButtons,
 }: {
   tittle: string;
   url: string;
   jsonParam?: string;
   searchBy: string;
-  render: (item: T) => React.ReactNode;
+  render: (item: T, functionButtons?: Function) => React.ReactNode;
+  functionButtons?: Function;
 }) {
   const [jsonResponse, setJsonResponse] = useState<T[]>([]);
   const searchParams = useSearchParams();
 
   useEffect(() => {
     async function updateJsonResponse() {
-      const response = await getJsonFromAPI(url, jsonParam, searchParams.get("search")?.toString(), searchBy);
-      setJsonResponse(response);
+      try {
+        const response = await getJsonFromAPI(url, jsonParam, searchParams.get("search")?.toString(), searchBy);
+        setJsonResponse(response);
+      } catch (error) {
+        const response:any = [{"id":1, "name":"pecho"},{"id":2, "name":"espalda"},{"id":3, "name":"pierna"},{"id":4, "name":"patass"},{"id":5, "name":"pecho3"},{"id":6, "name":"3333"},{"id":7, "name":"pecho"}]
+        setJsonResponse(response)
+      }
     }
 
     updateJsonResponse();
@@ -39,7 +46,7 @@ export default function List<T extends { id: number }>({
         <SearchBar placeholder={`Search ${tittle.toLowerCase()}`}></SearchBar>
         <AddElementButton/>
         <div className="pl-7 pr-7 pt-1 pb-1 w-full overflow-auto">
-            <ListGrid<T> json={jsonResponse} render={render}></ListGrid>
+            <ListGrid<T> json={jsonResponse} render={render} functionButtons={functionButtons}></ListGrid>
         </div>
       </div>
     </div>

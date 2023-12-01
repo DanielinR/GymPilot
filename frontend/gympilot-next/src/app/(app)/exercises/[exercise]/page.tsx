@@ -1,7 +1,7 @@
 "use client";
 
 import List from "@/components/list/List";
-import ListElement from "@/components/list/ListElement";
+import ListElement from "@/components/list/ListElementIdLink";
 
 export default function ExercisePage({params}:{params:{exercise:string}}){
 
