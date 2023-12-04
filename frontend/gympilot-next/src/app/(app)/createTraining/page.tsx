@@ -1,62 +1,71 @@
-"use client"
+"use client";
+import SelectExercise from "@/components/createTrainings/createTrainingPhases/SelectExercise";
+import SelectTemplate from "@/components/createTrainings/createTrainingPhases/SelectTemplate";
+import CreateSets from "@/components/createTrainings/createTrainingPhases/createSets/CreateSets";
+import CreateTrainingTopper from "@/components/createTrainings/topper";
+import { phases } from "@/libs/utils";
+import { Exercise } from "@/libs/utils";
+import CreateTrainingBottom from "@/components/createTrainings/bottom";
+import CreateSetsModal from "@/components/createTrainings/createTrainingPhases/createSets/CreateSetsModal";
+import { useEffect, useState } from "react";
 
-import List from "@/components/list/List";
-import ListElement from "@/components/list/ListElementFunction";
-import { useState } from "react";
+export default function CreateTrainingPage() {
+  const [phase, setPhase] = useState(phases.TrainingTemplates);
+  const [template, setTemplate] = useState(-1);
+  const [actualExercise, setActualExercise] = useState<{
+    id: number;
+    name: string;
+  }>();
+  const [viewModal, setViewModal] = useState(false);
+  const [actualWeight, setActualWeight] = useState<number>();
+  const [actualReps, setActualReps] = useState<number>();
+  const [exercises, setExercises] = useState<Exercise[]>([{name: "Pres banca", sets:[{reps:1, weight: 100}, {reps:1, weight: 100}, {reps:1, weight: 100}, {reps:10, weight: 200}, {reps:10, weight: 200}, {reps:10, weight: 200}]},]);
 
-export default function CreateTrainingPage(){
-    enum phases {
-        TrainingTemplates,
-        Exercises,
-        Weight,
-    } 
-    const QUESTIONS = ["What workout will you do today?", "What exercise do you want to do now?"] 
-    const [phase, setPhase] = useState(phases.TrainingTemplates)
-    const [actualExercise, setactualExercise] = useState<number>()
-    const [template, settemplate] = useState<number>()
-
-    const handleListButtonClick = (id: number) => {
-        switch(phase){
-            case phases.TrainingTemplates: {
-                settemplate(id);
-                setPhase(phases.Exercises);
-                break;
-            }
-            case phases.Exercises: {
-                setactualExercise(id)
-                setPhase(phases.Weight);
-                break;
-            }
-        }
+  const handleSelection = (id: number, name: string) => {
+    switch (phase) {
+      case phases.TrainingTemplates: {
+        setTemplate(id);
+        setPhase(phases.Exercises);
+        break;
+      }
+      case phases.Exercises: {
+        setActualExercise({ id, name });
+        setPhase(phases.Sets);
+        break;
+      }
+      case phases.Sets: {
+        setPhase(phases.Exercises);
+        break;
+      }
     }
-    if(phase === phases.Weight){
-        return(
-        <div className="h-full w-full flex flex-col items-center justify-start gap-20 pt-10">
-            <h1 className="text-5xl text-center font-bold text-color-secondary">How much weight are you going to use?</h1>
-            <div className="flex gap-2 items-center rounded-md bg-color-info-back p-4">
-                <input type="number" className="bg-color-info-back focus:outline-none w-36 text-center text-6xl"></input>
-                <span className="text-6xl">kg</span>
-            </div>
-        </div>
-        );
-    }else{
-        return(
-            <div className="h-full w-full">
-                <List<TrainingTemplate> tittle={QUESTIONS[phase]} searchBy="name" url="" render={ListElement} functionButtons={handleListButtonClick}></List>
-            </div>
-        );            
-    }
-}
-
-type TrainingTemplate = {
-    id: number,
-    name: string,
-}
-type Set = {
-    reps: number, 
-    weight: number,
-}
-type Exercise = {
-    name: string,
-    sets: Set[],
+  };
+  return (
+    <div className="h-full w-full overflow-hidden flex flex-col items-center">
+      <CreateTrainingTopper phase={phase} />
+      <div className="h-full w-full">
+        {(() => {
+          switch (phase) {
+            case phases.TrainingTemplates:
+              return SelectTemplate(handleSelection);
+            case phases.Exercises:
+              return SelectExercise(template, handleSelection);
+            case phases.Sets:
+              return CreateSets(
+                actualExercise ? actualExercise : {id:-1, name: "Pres banca"},
+                exercises,
+                setExercises,
+                setActualReps,
+                setViewModal,
+                actualReps,
+                actualWeight,
+              );
+            default:
+              return null;
+          }
+        })()}
+      </div>
+      <CreateTrainingBottom phase={phase} handleConfirm={handleSelection}/>
+      <CreateSetsModal viewModal={viewModal} setWeight={setActualWeight} weight={actualWeight} setViewModel={setViewModal}></CreateSetsModal>
+    </div>
+  );
 }

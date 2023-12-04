@@ -12,6 +12,7 @@ export default function NavbarContent({ isOpen }: { isOpen: Boolean }) {
       <div className="flex flex-col gap-2 pl-4">
         <NavbarLink tittle="Home" link="/"></NavbarLink>
         <NavbarLink tittle="Exercises" link="/exercises"></NavbarLink>
+        <NavbarLink tittle="Add training" link="/createTraining"></NavbarLink>
       </div>
     </div>
   );

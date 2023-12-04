@@ -20,3 +20,8 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #008C93; /* Color del thumb al pasar el ratón */
 }
+
+/* quito los botones laterales para el input */
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
