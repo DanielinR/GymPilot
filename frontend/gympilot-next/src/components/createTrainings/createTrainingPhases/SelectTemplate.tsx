@@ -7,6 +7,7 @@ export default function SelectTemplate(handleSelection: Function) {
       <div className="h-fit w-full flex items-center justify-center">
         <List<TrainingTemplate>
           tittle={"What workout will you do today?"}
+          tittleSize="text-4xl"
           searchBy="name"
           url={"/trainingTemplates"}
           render={ListElement}

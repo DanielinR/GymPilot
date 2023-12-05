@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 
 export default function List<T extends { id: number }>({
   tittle,
+  tittleSize = "text-5xl",
   listHeight,
   url,
   jsonParam,
@@ -16,6 +17,7 @@ export default function List<T extends { id: number }>({
   functionButtons,
 }: {
   tittle: string;
+  tittleSize?: string;
   listHeight?: number;
   url: string;
   jsonParam?: string;
@@ -37,8 +39,8 @@ export default function List<T extends { id: number }>({
   }, [jsonParam, url, searchParams, searchBy]);
 
   return (
-    <div className="flex flex-col items-center p-10 h-full">
-      <h1 className="text-color-font text-5xl font-bold mb-10 text-center">
+    <div className="flex flex-col items-center px-10 pt-2 h-full">
+      <h1 className={`text-color-font ${tittleSize} font-bold mb-5 text-center`}>
         {tittle}
       </h1>
       <div style={{ height: `${listHeight}px` }} className={`flex flex-col items-center gap-5 w-full`}>

@@ -1,6 +1,6 @@
 import { ExerciseTrain, Set, Exercise } from "@/libs/utils";
 import SelectNumber from "../SelectNumber";
-import Setbox from "../SetBox";
+import Setbox from "./SetBox";
 import CreateSetsTittle from "./CreateSetsTittle";
 
 export default function CreateSets(

@@ -34,7 +34,7 @@ export default function CreateTrainingPage() {
     updateWeight();
   }, [actualExercise]);
 
-  const handleConfirm = async (id: number, name: string) => {
+  const handleConfirmButton = async (id: number, name: string) => {
     switch (phase) {
       case phases.Exercises: {
         await setTraining(exercises, template)
@@ -47,6 +47,7 @@ export default function CreateTrainingPage() {
       }
     }
   }
+
   const handleSelection = (id: number, name: string) => {
     switch (phase) {
       case phases.TrainingTemplates: {
@@ -71,7 +72,7 @@ export default function CreateTrainingPage() {
             case phases.TrainingTemplates:
               return SelectTemplate(handleSelection);
             case phases.Exercises:
-              return SelectExercise(template, handleSelection);
+              return SelectExercise(template, handleSelection, exercises);
             case phases.Sets:
               return CreateSets(
                 actualExercise ? actualExercise : { id: -1, name: "" },
@@ -87,7 +88,7 @@ export default function CreateTrainingPage() {
           }
         })()}
       </div>
-      <CreateTrainingBottom phase={phase} handleConfirm={handleConfirm} />
+      <CreateTrainingBottom phase={phase} handleConfirmButton={handleConfirmButton}/>
       <CreateSetsModal
         viewModal={viewModal}
         setWeight={setActualWeight}
