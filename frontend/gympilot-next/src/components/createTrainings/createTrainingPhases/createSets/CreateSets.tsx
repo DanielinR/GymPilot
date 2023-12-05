@@ -1,12 +1,12 @@
-import { Exercise, Set } from "@/libs/utils";
+import { ExerciseTrain, Set, Exercise } from "@/libs/utils";
 import SelectNumber from "../SelectNumber";
 import Setbox from "../SetBox";
 import CreateSetsTittle from "./CreateSetsTittle";
 
 export default function CreateSets(
-  actualExercise: { id: number; name: string },
-  exercises: Exercise[],
-  setExercises: (exercises: Exercise[]) => void,
+  actualExercise: Exercise,
+  exercises: ExerciseTrain[],
+  setExercises: (exercises: ExerciseTrain[]) => void,
   setActualReps: (number?: number) => void,
   setViewModal: Function,
   actualReps?: number,
@@ -21,7 +21,7 @@ export default function CreateSets(
     const newSet: Set = { reps: actualReps, weight: actualWeight };
     
     const exerciseIndex = updatedExercises.findIndex(
-      (exercise) => exercise.name === actualExercise.name
+      (exerciseTrain) => exerciseTrain.exercise.name === actualExercise.name
     );
     if (exerciseIndex !== -1) {
       const updatedSets = [...updatedExercises[exerciseIndex].sets, newSet];
@@ -30,8 +30,11 @@ export default function CreateSets(
         sets: updatedSets,
       };
     } else {
-      const newExercise: Exercise = {
-        name: actualExercise.name,
+      const newExercise: ExerciseTrain = {
+        exercise:{
+          id: actualExercise.id,
+          name: actualExercise.name,
+        },
         sets: [newSet],
       };
       updatedExercises.push(newExercise);
@@ -52,8 +55,8 @@ export default function CreateSets(
           handleSelection={createSet}
         />
         <div className="flex justify-center items-center gap-2 w-fit bg-color-primary-strong p-4 rounded-md flex-wrap max-h-48 max-w-lg overflow-auto">
-            {exercises.find(exercise => exercise.name == actualExercise.name) ?
-            exercises.find(exercise => exercise.name == actualExercise.name)?.sets.map((item, index)=>{
+            {exercises.find(exerciseTrain => exerciseTrain.exercise.name == actualExercise.name) ?
+            exercises.find(exerciseTrain => exerciseTrain.exercise.name == actualExercise.name)?.sets.map((item, index)=>{
                 return(<Setbox key={index} set={item}></Setbox>);}) : <div className="w-14 h-20"/>}
         </div>
       </div>

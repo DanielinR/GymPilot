@@ -10,6 +10,8 @@ router.register(r'sets', views.SetViewSet)
 router.register(r'exerciseTypes', views.ExerciseTypeViewSet)
 
 urlpatterns = [
-    path('/', include(router.urls)),
-    path('/monthTrainedDays/<int:month>/<int:year>/', views.MonthTrainedDays.as_view(), name='monthTrainedDays'),
+    path('', include(router.urls)),
+    path('monthTrainedDays/<int:month>/<int:year>/', views.MonthTrainedDays.as_view(), name='monthTrainedDays'),
+    path('lastWeightFromExercise/<int:exerciseId>/', views.LastWeightFromExercise.as_view(), name='lastWeightFromExercise'),
+    path('createTraining/', views.CreateTraining.as_view(), name='createTraining'),
 ]

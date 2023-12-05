@@ -1,3 +1,5 @@
+import { Exercise, ExerciseTrain } from "./utils";
+
 const url = "http://localhost:8000/api";
 
 export async function getJsonFromAPI(
@@ -7,10 +9,10 @@ export async function getJsonFromAPI(
   searchBy?: string
 ) {
   const response = await fetch(url + "/v1" + dir + "/", {
-      method: 'GET',
-      headers: {
-          'Authorization': `Token ${localStorage.getItem('token')}`
-      }
+    method: "GET",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
   });
   const data = await response.json();
   const dataParam = param ? data[param] : data;
@@ -25,17 +27,47 @@ export async function getMonthTrainings(
   month: number,
   year: number
 ): Promise<number[]> {
-  const response = await fetch(
-    url + `/v1/monthTrainedDays/${month}/${year}/`
-    , {
-      method: 'GET',
-      headers: {
-          'Authorization': `Token ${localStorage.getItem('token')}`
-      }
+  const response = await fetch(url + `/v1/monthTrainedDays/${month}/${year}/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
   });
   const data: Promise<{ days_trained: number[] }> = response.json();
   return (await data).days_trained;
 }
+
+export async function getWeightFromExercise(
+  exerciseId?: number
+): Promise<number> {
+  const response = await fetch(url + `/v1/lastWeightFromExercise/${exerciseId}/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
+  });
+  const data = await response.json();
+  return (await data).weight;
+}
+
+export async function setTraining(
+  exercises: ExerciseTrain[],
+  templateId: number,
+){
+  fetch(url + `/v1/createTraining/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+      "Content-Type": 'application/json',
+    },
+    body: JSON.stringify({"templateId": templateId, "exercises": exercises}),
+  }).then(response => {
+    if (response.ok){
+      response.json()
+    }
+  })
+}
+
 
 type Credentials = {
   username: string;
@@ -45,7 +77,7 @@ type Credentials = {
 export const login = async (credentials: Credentials) => {
   const response = await fetch(url + "/rest-auth/login/", {
     method: "POST",
-    credentials: 'omit',
+    credentials: "omit",
     headers: {
       "Content-Type": "application/json",
     },
@@ -64,8 +96,8 @@ export const logout = async (): Promise<void> => {
   const response = await fetch(url + "/rest-auth/logout/", {
     method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Token ' + localStorage.getItem('token'),
+      "Content-Type": "application/json",
+      Authorization: "Token " + localStorage.getItem("token"),
     },
   });
 

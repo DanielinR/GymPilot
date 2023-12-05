@@ -4,23 +4,49 @@ import SelectTemplate from "@/components/createTrainings/createTrainingPhases/Se
 import CreateSets from "@/components/createTrainings/createTrainingPhases/createSets/CreateSets";
 import CreateTrainingTopper from "@/components/createTrainings/topper";
 import { phases } from "@/libs/utils";
-import { Exercise } from "@/libs/utils";
+import { Exercise, ExerciseTrain } from "@/libs/utils";
 import CreateTrainingBottom from "@/components/createTrainings/bottom";
 import CreateSetsModal from "@/components/createTrainings/createTrainingPhases/createSets/CreateSetsModal";
 import { useEffect, useState } from "react";
+import { getWeightFromExercise, setTraining } from "@/libs/data";
+import { useRouter } from 'next/navigation';
 
 export default function CreateTrainingPage() {
+  const router = useRouter();
   const [phase, setPhase] = useState(phases.TrainingTemplates);
   const [template, setTemplate] = useState(-1);
-  const [actualExercise, setActualExercise] = useState<{
-    id: number;
-    name: string;
-  }>();
+  const [actualExercise, setActualExercise] = useState<Exercise>();
   const [viewModal, setViewModal] = useState(false);
   const [actualWeight, setActualWeight] = useState<number>();
   const [actualReps, setActualReps] = useState<number>();
-  const [exercises, setExercises] = useState<Exercise[]>([{name: "Pres banca", sets:[{reps:1, weight: 100}, {reps:1, weight: 100}, {reps:1, weight: 100}, {reps:10, weight: 200}, {reps:10, weight: 200}, {reps:10, weight: 200}]},]);
+  const [exercises, setExercises] = useState<ExerciseTrain[]>([]);
 
+  useEffect(() => {
+    async function updateWeight() {
+      if (!actualExercise){return}
+      const newWeight = await getWeightFromExercise(actualExercise?.id);
+      setActualWeight(newWeight);
+      if (newWeight == null) {
+        setViewModal(true)
+      }
+    }
+
+    updateWeight();
+  }, [actualExercise]);
+
+  const handleConfirm = async (id: number, name: string) => {
+    switch (phase) {
+      case phases.Exercises: {
+        await setTraining(exercises, template)
+        // router.push('/');
+        break;
+      }
+      case phases.Sets: {
+        setPhase(phases.Exercises);
+        break;
+      }
+    }
+  }
   const handleSelection = (id: number, name: string) => {
     switch (phase) {
       case phases.TrainingTemplates: {
@@ -33,12 +59,9 @@ export default function CreateTrainingPage() {
         setPhase(phases.Sets);
         break;
       }
-      case phases.Sets: {
-        setPhase(phases.Exercises);
-        break;
-      }
     }
   };
+  
   return (
     <div className="h-full w-full overflow-hidden flex flex-col items-center">
       <CreateTrainingTopper phase={phase} />
@@ -51,21 +74,26 @@ export default function CreateTrainingPage() {
               return SelectExercise(template, handleSelection);
             case phases.Sets:
               return CreateSets(
-                actualExercise ? actualExercise : {id:-1, name: "Pres banca"},
+                actualExercise ? actualExercise : { id: -1, name: "" },
                 exercises,
                 setExercises,
                 setActualReps,
                 setViewModal,
                 actualReps,
-                actualWeight,
+                actualWeight
               );
             default:
               return null;
           }
         })()}
       </div>
-      <CreateTrainingBottom phase={phase} handleConfirm={handleSelection}/>
-      <CreateSetsModal viewModal={viewModal} setWeight={setActualWeight} weight={actualWeight} setViewModel={setViewModal}></CreateSetsModal>
+      <CreateTrainingBottom phase={phase} handleConfirm={handleConfirm} />
+      <CreateSetsModal
+        viewModal={viewModal}
+        setWeight={setActualWeight}
+        weight={actualWeight}
+        setViewModel={setViewModal}
+      ></CreateSetsModal>
     </div>
   );
 }

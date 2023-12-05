@@ -12,7 +12,13 @@ export type Set = {
   reps: number;
   weight: number;
 };
-export type Exercise = {
-  name: string;
+export type ExerciseTrain = {
+  exercise: Exercise,
   sets: Set[];
 };
+
+export type Exercise = {
+  id: number,
+  name: string;
+};
+
