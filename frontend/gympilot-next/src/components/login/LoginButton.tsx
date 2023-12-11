@@ -2,6 +2,7 @@
 
 import { login } from "@/libs/data";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginButton({
   username,
@@ -10,9 +11,12 @@ export default function LoginButton({
   username: string;
   password: string;
 }) {
+  const router = useRouter()
+
   const handleLogin = async () => {
     try {
       const response = await login({ username, password });
+      if (response) { router.push("/") }
     } catch (error) {
       console.error(error);
     }

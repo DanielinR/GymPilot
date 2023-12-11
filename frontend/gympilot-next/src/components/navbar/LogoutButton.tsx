@@ -1,14 +1,18 @@
 "use client";
 
 import { logout } from "@/libs/data";
+import { useRouter } from "next/navigation";
 
 export default function LogoutButton() {
+const router = useRouter();
+
   const handleLogout = async () => {
     try {
       await logout();
     } catch (error) {
       console.error(error);
     }
+    router.push('/login')
   };
 
   return (

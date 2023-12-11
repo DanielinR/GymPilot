@@ -4,12 +4,26 @@ import LoginInput from "@/components/login/LoginInput";
 import LoginButton from "@/components/login/LoginButton";
 import Image from "next/image";
 import "@/components/login/style.css"
-import { use, useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { checkAuth } from "@/libs/data";
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
+  const router = useRouter()
+
+  useEffect(() => {
+    const verifyAuth = async () => {
+        const isAuth = await checkAuth();
+        if (isAuth) {
+            router.push('/');
+        }
+    };
+
+    verifyAuth();
+}, [router]);
+
   return (
     <div className="flex h-screen w-screen bg-color-primary overflow-hidden">
       <div className="flex flex-1 xl:flex-initial flex-col gap-8 items-center justify-center w-2/5 bg-color-info-back">  

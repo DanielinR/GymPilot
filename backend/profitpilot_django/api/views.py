@@ -83,3 +83,9 @@ class CreateTraining(views.APIView):
             return Response({"error": "Exercise not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CheckAuth(views.APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+         return Response({"status": "success"}, status=status.HTTP_200_OK)

@@ -90,6 +90,7 @@ export const login = async (credentials: Credentials) => {
 
   const data = await response.json();
   localStorage.setItem("token", data.key);
+  return data.key !== "";
 };
 
 export const logout = async (): Promise<void> => {
@@ -106,4 +107,16 @@ export const logout = async (): Promise<void> => {
   }
 
   localStorage.removeItem("token");
+};
+
+export const checkAuth = async (): Promise<boolean> => {
+  const response = await fetch(url + "/v1/checkAuth/", {
+    method: "POST",
+    credentials: "omit",
+    headers: {
+      Authorization: "Token " + localStorage.getItem("token"),
+    },
+  })
+
+  return response.status == 200
 };
