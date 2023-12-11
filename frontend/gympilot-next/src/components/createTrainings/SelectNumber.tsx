@@ -7,10 +7,10 @@ export default function SelectNumber({
   selectionText: string;
   handleSelection: Function;
   number: string;
-  setNumber: (number?: number) => void;
+  setNumber: (number: number) => void;
 }) {
   return (
-    <form className="flex flex-col gap-4 items-center justify-center">
+    <form name="selectNumberForm" className="flex flex-col gap-4 items-center justify-center">
       <div className="flex flex-col gap-2 items-center rounded-md bg-color-info-back p-4 pb-2">
         <input
           onChange={(event) => {

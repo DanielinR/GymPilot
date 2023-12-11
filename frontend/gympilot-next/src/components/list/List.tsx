@@ -1,3 +1,5 @@
+"use client";
+
 import SearchBar from "@/components/SearchBar";
 import ListGrid from "@/components/list/ListGrid";
 import AddElementButton from "./AddElementButton";
@@ -12,7 +14,7 @@ export default function List<T extends { id: number }>({
   url,
   jsonParam,
   searchBy,
-  addButton,
+  addButton = false,
   render,
   functionButtons,
 }: {
@@ -22,9 +24,9 @@ export default function List<T extends { id: number }>({
   url: string;
   jsonParam?: string;
   searchBy: string;
-  addButton: boolean;
-  render: (item: T, functionButtons?: Function) => React.ReactNode;
-  functionButtons?: Function;
+  addButton?: boolean;
+  render: (item: T, functionButtons?: (item:T) => void) => React.ReactNode;
+  functionButtons?: (item:T) => void;
 }) {
   const [jsonResponse, setJsonResponse] = useState<T[]>([]);
   const searchParams = useSearchParams();
@@ -39,7 +41,7 @@ export default function List<T extends { id: number }>({
   }, [jsonParam, url, searchParams, searchBy]);
 
   return (
-    <div className="flex flex-col items-center px-10 pt-2 h-full">
+    <div className="flex flex-col items-center px-10 pt-2 h-full w-full">
       <h1 className={`text-color-font ${tittleSize} font-bold mb-5 text-center`}>
         {tittle}
       </h1>

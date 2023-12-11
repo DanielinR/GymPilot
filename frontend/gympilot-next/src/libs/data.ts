@@ -1,6 +1,6 @@
-import { Exercise, ExerciseTrain } from "./utils";
+import { ExerciseTrain } from "./utils";
 
-const url = "http://localhost:8000/api";
+const url = "http://192.168.1.61:8000/api";
 
 export async function getJsonFromAPI(
   dir: string,

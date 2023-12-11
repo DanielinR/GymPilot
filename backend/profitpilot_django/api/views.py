@@ -53,7 +53,7 @@ class LastWeightFromExercise(views.APIView):
         last_set_weight = models.Set.objects.filter(
             Q(exercise__user=request.user) | Q(exercise__user__isnull=True),
             exercise_id=exerciseId,
-        ).values('weight').select_related('training').order_by('-training__date', '-id').first()
+        ).select_related('training').order_by('-training__date', '-id').values().first()
         weight = last_set_weight['weight'] if last_set_weight else None
         return Response({"weight": weight})
 

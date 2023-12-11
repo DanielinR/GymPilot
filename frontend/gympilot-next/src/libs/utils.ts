@@ -4,6 +4,7 @@ export function calculateDaysInMonth(month: number) {
 
 export enum phases {
   TrainingTemplates,
+  WatchActualTraining,
   Exercises,
   Sets,
 };
@@ -18,6 +19,11 @@ export type ExerciseTrain = {
 };
 
 export type Exercise = {
+  id: number,
+  name: string;
+};
+
+export type Template = {
   id: number,
   name: string;
 };
