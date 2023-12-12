@@ -28,3 +28,6 @@ export type Template = {
   name: string;
 };
 
+export const isMediumScreenOrLarger = () => {
+  return window.innerWidth >= 768;
+};

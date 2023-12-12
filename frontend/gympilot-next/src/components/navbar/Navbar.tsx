@@ -4,10 +4,12 @@ import React, { useState } from 'react';
 import NavbarButton from './NavbarButton';
 import NavbarContent from './NavbarContent';
 import LogoutButton from './LogoutButton';
+import { isMediumScreenOrLarger } from '@/libs/utils';
 
 function Navbar() {
-  const sidebarState = localStorage.getItem('sidebarOpen');
-  const [isOpen, setIsOpen] = useState(sidebarState === 'true');
+  var sidebarOpen = localStorage.getItem('sidebarOpen');
+  if (isMediumScreenOrLarger() && sidebarOpen == null) {sidebarOpen = "true"}
+  const [isOpen, setIsOpen] = useState(sidebarOpen === 'true');
 
   const handleNavClick = () => {
     const newState = !isOpen;
