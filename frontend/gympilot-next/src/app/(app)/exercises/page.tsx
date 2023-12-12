@@ -1,16 +1,20 @@
 "use client";
 
 import List from "@/components/list/List";
-import ListElement from "@/components/list/ListElementIdLink";
+import ExerciseElement from "@/components/list/ExerciseElement"; "@/components/list/ExerciseElement";
 
-export default function exercisesPage() {
+export default function ExercisesPage() {
 
   type ExerciseType = {
     id: number,
     name: string;
+    type: number;
+    last_weight: number;
   };
   
   return (
-    <List<ExerciseType> tittle="Exercise types" url="/exerciseTypes" searchBy="name" render={ListElement}></List>
+    <div className="m-10">
+      <List<ExerciseType> listHeight={690} tittle="Exercises" url="/exercises" searchBy="name" render={ExerciseElement}></List>
+    </div>
   );
 }

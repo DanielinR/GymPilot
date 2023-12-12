@@ -49,32 +49,32 @@ class MonthTrainedDays(views.APIView):
 class LastWeightFromExercise(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def get(self, request, exerciseId):
-        last_set_weight = models.Set.objects.filter(
-            Q(exercise__user=request.user) | Q(exercise__user__isnull=True),
-            exercise_id=exerciseId,
-        ).select_related('training').order_by('-training__date', '-id').values().first()
-        weight = last_set_weight['weight'] if last_set_weight else None
+    def get(self, request, exercise_id):
+        exercise = models.Exercise.objects.get(id=exercise_id)
+        weight = exercise.get_last_set_weight(request.user)
         return Response({"weight": weight})
 
 
 class CreateTraining(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def createSetsFromExercise(self, sets_json, exercise_id, training):
+    def create_sets_from_exercise(self, sets_json, exercise_id, training):
         for set in sets_json:
-            new_set = models.Set(reps=set["reps"],weight=set["weight"], exercise=models.Exercise.objects.get(id=exercise_id), training=training)
+            new_set = models.Set(reps=set["reps"], weight=set["weight"],
+                                 exercise=models.Exercise.objects.get(id=exercise_id), training=training)
             new_set.save()
 
     @transaction.atomic
     def post(self, request):
         try:
             data_json = request.data
-            if len(data_json["exercises"]) == 0: return Response({"error": "Not exercises included"}, status=status.HTTP_400_BAD_REQUEST)
-            new_train = models.Training(user=request.user, trainingTemplate=models.TrainingTemplate.objects.get(id=data_json["templateId"]))
+            if len(data_json["exercises"]) == 0: return Response({"error": "Not exercises included"},
+                                                                 status=status.HTTP_400_BAD_REQUEST)
+            new_train = models.Training(user=request.user, trainingTemplate=models.TrainingTemplate.objects.get(
+                id=data_json["templateId"]))
             new_train.save()
             for exercise_train in data_json["exercises"]:
-                self.createSetsFromExercise(exercise_train['sets'], exercise_train['exercise']['id'], new_train)
+                self.create_sets_from_exercise(exercise_train['sets'], exercise_train['exercise']['id'], new_train)
             return Response({"status": "success"}, status=status.HTTP_201_CREATED)
 
         except models.TrainingTemplate.DoesNotExist:
@@ -84,8 +84,9 @@ class CreateTraining(views.APIView):
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
 class CheckAuth(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
-         return Response({"status": "success"}, status=status.HTTP_200_OK)
+        return Response({"status": "success"}, status=status.HTTP_200_OK)

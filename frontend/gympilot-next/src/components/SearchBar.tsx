@@ -39,7 +39,7 @@ export default function SearchBar({ placeholder }: { placeholder?: string }) {
         placeholder={placeholder ? placeholder : ""}
         defaultValue={searchParams.get("search")?.toString()}
       ></input>
-      <button className="bg-color-secondary hover:bg-color-secondary-dark p-2 h-full rounded-e-md w-12 flex items-center justify-center">
+      <button className="bg-color-secondary p-2 h-full rounded-e-md w-12 flex items-center justify-center">
         <SearchIcon
           className="h-6 w-6 text-color-font"
         ></SearchIcon>

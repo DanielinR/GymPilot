@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
+from django.db.models import Q
 
 
 # Create your models here.
@@ -24,6 +25,13 @@ class Exercise(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.type})"
+
+    def get_last_set_weight(self, user):
+        last_set_weight = Set.objects.filter(
+            Q(exercise__user=user) | Q(exercise__user__isnull=True),
+            exercise_id=self.id,
+        ).select_related('training').order_by('-training__date', '-id').values().first()
+        return last_set_weight['weight'] if last_set_weight else None
 
     class Meta:
         unique_together = ('name', 'user',)

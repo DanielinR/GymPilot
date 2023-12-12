@@ -3,13 +3,27 @@ from . import models
 
 
 class ExerciseSerializer(serializers.ModelSerializer):
+    last_weight = serializers.SerializerMethodField()
+
     class Meta:
         model = models.Exercise
-        fields = ['id', 'name', 'type']
+        fields = ['id', 'name', 'type', 'last_weight']
+
+    def get_last_weight(self, obj):
+        request = self.context.get("request")
+        if request and hasattr(request, "user") and request.user.id:
+            return obj.get_last_set_weight(request.user)
+        return None
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['type'] = instance.type.name
+        return representation
 
 
 class ExerciseTypeSerializer(serializers.ModelSerializer):
     exercises = ExerciseSerializer(many=True, read_only=True)
+
     class Meta:
         model = models.ExerciseType
         fields = ['id', 'name', 'exercises']
