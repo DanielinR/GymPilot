@@ -1,5 +1,5 @@
-export function calculateDaysInMonth(month: number) {
-  return new Date(2023, month + 1, 0).getDate();
+export function calculateDaysInMonth(month: number, year: number) {
+  return new Date(year, month, 0).getDate();
 };
 
 export enum phases {

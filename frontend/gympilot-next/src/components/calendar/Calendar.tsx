@@ -18,8 +18,7 @@ function Calendar() {
     async function updateTrainedDays() {
       setTrainedDays(await getMonthTrainings(currentMonth, currentYear));
     };
-    
-    setdaysInMonth(calculateDaysInMonth(currentMonth));
+    setdaysInMonth(calculateDaysInMonth(currentMonth, currentYear));
     updateTrainedDays();
   }, [currentMonth, currentYear]);
 
