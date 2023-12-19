@@ -13,7 +13,7 @@ export default function ExercisesPage() {
   };
   
   return (
-    <div className="m-10">
+    <div className="m-5">
       <List<ExerciseType> listHeight={690} tittle="Exercises" url="/exercises" searchBy="name" render={ExerciseElement}></List>
     </div>
   );

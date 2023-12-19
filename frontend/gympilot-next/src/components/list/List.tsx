@@ -1,6 +1,6 @@
 "use client";
 
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "./SearchBar/SearchBar";
 import ListGrid from "@/components/list/ListGrid";
 import AddElementButton from "./AddElementButton";
 import React, { useState, useEffect, Suspense } from "react";
@@ -42,11 +42,11 @@ export default function List<T extends { id: number }>({
 
   return (
     <div className="flex flex-col items-center pt-2 h-full w-full">
-      <h1 className={`text-color-font ${tittleSize} font-bold mb-5 text-center`}>
+      <h2 className={`text-white ${tittleSize} font-bold mb-5 text-center`}>
         {tittle}
-      </h1>
+      </h2>
       <div style={{ height: `${listHeight}px` }} className={`flex flex-col items-center gap-5 w-full`}>
-        <SearchBar placeholder={`Search ${tittle.endsWith("?") ? tittle.slice(0,-1).toLowerCase() : tittle.toLowerCase()}`}></SearchBar>
+        <SearchBar filters={["template,type"]} placeholder={`Search ${tittle.endsWith("?") ? tittle.slice(0,-1).toLowerCase() : tittle.toLowerCase()}`}></SearchBar>
         {addButton && <AddElementButton/>}
         <div className="px-4 pt-1 pb-1 w-full overflow-auto">
             <ListGrid<T> json={jsonResponse} render={render} functionButtons={functionButtons}></ListGrid>
