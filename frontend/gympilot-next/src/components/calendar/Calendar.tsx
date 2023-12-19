@@ -5,6 +5,7 @@ import Image from 'next/image';
 import CalendarDay from "./Calendar-day"
 import { calculateDaysInMonth } from '@/libs/utils'; "../libs/utils"
 import { getMonthTrainings } from '@/libs/data';
+import ArrowIcon from '../svg/ArrowIcon';
 
 function Calendar() {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
@@ -30,17 +31,20 @@ function Calendar() {
   }
 
   return (
-    <div className="bg-color-info-back text-color-font shadow-md rounded-md p-5 flex flex-col justify-center items-center">
-      <div className='flex items-center justify-between w-full mb-7'>
+    <div className="text-white flex flex-col justify-center items-center flex-[4] p-3 w-full sm:w-5/6 sm:pb-10 pt-0">
+      <div className='flex items-center justify-evenly w-full'>
         <button onClick={() => {handleMonthsClick(-1)}}>
-         <Image width={30} height={30} src={"/arrow.png"} alt='previous month' className='bg-color-secondary scale-x-[-1] shadow-md rounded-full'></Image>
+        <ArrowIcon className='h-9 w-9 md:h-12 md:w-12 p-1 bg-brand-500 hover:bg-brand-700 shadow-md rounded-full rotate-180'></ArrowIcon>
         </button>
-        <h2 className="bg-color-primary-strong px-2.5 py-1.5 rounded-full text-xl w-32 text-center">{monthNames[currentMonth - 1]}</h2>
+        <div>
+          <h2 className="text-2xl w-32 text-center">{monthNames[currentMonth - 1]}</h2>
+          <h2 className="text-center font-normal text-normal">{currentYear}</h2>
+        </div>
         <button onClick={() => {handleMonthsClick(+1)}}>
-          <Image width={30} height={30} src={"/arrow.png"} alt='next month' className='bg-color-secondary shadow-md rounded-full'></Image>
+          <ArrowIcon className='h-9 w-9 p-1 md:h-12 md:w-12 bg-brand-500 hover:bg-brand-700 shadow-md rounded-full'></ArrowIcon>
         </button>
       </div>
-      <div className="grid grid-cols-7 grid-rows-6 gap-2.5">
+      <div className="grid grid-cols-7 grid-rows-6 gap-1 md:gap-2 flex-1 w-full pt-5">
         {dayNames.map((day, index) => {
           return (
           <DayTittle key={day}>{day}</DayTittle>
@@ -62,7 +66,7 @@ function Calendar() {
 function DayTittle({children} : {children:string}) {
   return (
     <div className='flex items-center justify-center'>
-      <p className='text-center flex items-center justify-center bg-color-primary-strong rounded-full w-8 h-8 text-xs'>{children}</p>
+      <p className='text-center flex items-center justify-center bg-neutral-800 rounded-full w-8 h-8 md:h-14 md:w-14 text-xs md:text-base'>{children}</p>
     </div>
   );
 }

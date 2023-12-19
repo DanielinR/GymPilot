@@ -3,6 +3,7 @@
 import { login } from "@/libs/data";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import ArrowIcon from "../svg/ArrowIcon";
 
 export default function LoginButton({
   username,
@@ -26,9 +27,9 @@ export default function LoginButton({
     <button
       type="submit"
       formAction={handleLogin}
-      className="text-xl font-bold bg-color-secondary flex justify-center items-center w-2/5 rounded-2xl p-3 shadow-xl text-color-font"
+      className="flex justify-center items-center"
     >
-      Login
+      <ArrowIcon className="w-16 h-16 sm:h-20 sm:w-20 text-white bg-brand-500 hover:bg-brand-700 rounded-2xl p-3 shadow-sm shadow-brand-500"></ArrowIcon>
     </button>
   );
 }

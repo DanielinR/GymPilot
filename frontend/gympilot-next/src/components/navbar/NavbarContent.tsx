@@ -1,32 +1,37 @@
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
+import HomeIcon from "../svg/HomeIcon";
+import DumbellIcon from "../svg/DumbellIcon";
+import LogoWithLetters from "../LogoWithLetters";
+import Image from "next/image";
 
-export default function NavbarContent({ isOpen, selectOption }: { isOpen: Boolean, selectOption:Function}) {
+export default function NavbarContent({ isOpen, selectOption }: { isOpen: Boolean, selectOption: Function }) {
   return (
-    <div className={`flex flex-col gap-7 ${!isOpen ? "hidden" : ""}`}>
-      <div className="flex items-center gap-4">
-        <Image alt="logo image" src={"/icon.png"} width={55} height={60} />
-        <h1 className="font-bold text-2xl">Gym Pilot</h1>
+    <div className={`flex flex-col gap-9 ${!isOpen ? "hidden md:flex" : ""}`}>
+      <div className={`flex items-center gap-4 ${isOpen ? "" : "justify-center mt-5"}`}>
+        {isOpen && <LogoWithLetters></LogoWithLetters>}
+        {!isOpen && <Image alt="logo image" src={"/icon.png"} width={40} height={50} />}
       </div>
-      <div className="flex flex-col gap-2 pl-4">
-        <NavbarLink tittle="Home" link="/" selectOption={selectOption}></NavbarLink>
-        <NavbarLink tittle="Exercises" link="/exercises" selectOption={selectOption}></NavbarLink>
-        <NavbarLink tittle="Add training" link="/createTraining" selectOption={selectOption}></NavbarLink>
+      <div className="flex flex-col gap-2">
+        <NavbarLink tittle={isOpen ? "Home" : ""} link="/" selectOption={selectOption} SvgIcon={HomeIcon}></NavbarLink>
+        <NavbarLink tittle={isOpen ? "Exercises" : ""} link="/exercises" selectOption={selectOption} SvgIcon={DumbellIcon}></NavbarLink>
+        <NavbarLink tittle={isOpen ? "Add training" : ""} link="/createTraining" selectOption={selectOption} SvgIcon={HomeIcon}></NavbarLink>
       </div>
     </div>
   );
 }
 
-function NavbarLink({ tittle, link, selectOption }: { tittle: string; link: string, selectOption:Function }) {
+function NavbarLink({ tittle, link, selectOption, SvgIcon }: { tittle: string; link: string, selectOption: Function, SvgIcon: ({ className }: { className: string; }) => ReactNode; }) {
   const pathname = usePathname();
 
   return (
     <Link
-      onClick={()=>{selectOption()}}
-      className={`${pathname == link ? "bg-color-primary" : ""}  hover:bg-color-primary mr-8 p-3 rounded-xl`}
+      className={`flex items-center gap-3 ${pathname == link ? "bg-neutral-700" : ""}  hover:bg-neutral-800 py-3 px-4 rounded-xl`}
+      onClick={() => { selectOption() }}
       href={link}
     >
+      <SvgIcon className="h-6 w-6 text-white fill-white"></SvgIcon>
       {tittle}
     </Link>
   );
