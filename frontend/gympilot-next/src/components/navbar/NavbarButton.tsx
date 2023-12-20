@@ -1,11 +1,32 @@
+import { isMediumScreenOrLarger } from "@/libs/utils";
+import GreaterThanIcon from "../svg/GreaterThanIcon";
+import MenuIcon from "../svg/MenuIcon";
 
-export default function NavbarButton({handleClick, isOpen} : {handleClick:VoidFunction, isOpen: Boolean}){
-
-    return(
-        <div className='absolute right-0 top-1/2 z-40 -translate-y-1/2 translate-x-8'>
-          <button onClick={handleClick} className='bg-neutral-700 rounded-full p-1 flex justify-center items-center hover:bg-color-primary'>
-            <svg width={20} height={20} viewBox="0 0 1024 1024" className={`icon ${!isOpen ? 'rotate-180' : ''}`} version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z" fill="#fff"></path></g></svg>
-          </button>
-        </div>
-    );
+export default function NavbarButton({
+  handleClick,
+  isOpen,
+}: {
+  handleClick: VoidFunction;
+  isOpen: Boolean;
+}) {
+  return (
+    <div
+      className={`absolute right-0 top-1 md:top-1/2 z-40 md:-translate-y-1/2 md:translate-x-8 translate-x-11 ${
+        isOpen && !isMediumScreenOrLarger() && "hidden"
+      }`}
+    >
+      <button
+        onClick={handleClick}
+        className="bg-neutral-700 rounded-full p-1 flex justify-center items-center hover:bg-color-primary"
+      >
+        {isMediumScreenOrLarger() ? (
+          <GreaterThanIcon
+            className={`icon ${!isOpen ? "rotate-180" : ""}`}
+          ></GreaterThanIcon>
+        ) : (
+          <MenuIcon className="h-8 w-8"></MenuIcon>
+        )}
+      </button>
+    </div>
+  );
 }
