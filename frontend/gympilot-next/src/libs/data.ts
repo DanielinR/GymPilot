@@ -1,12 +1,10 @@
-import { ExerciseTrain } from "./utils";
+import { ExerciseTrain, filterJsonEquals } from "./utils";
 
 const url = "http://192.168.1.61:8000/api";
 
 export async function getJsonFromAPI(
   dir: string,
   param?: string,
-  search?: string,
-  searchBy?: string
 ) {
   const response = await fetch(url + "/v1" + dir + "/", {
     method: "GET",
@@ -15,12 +13,24 @@ export async function getJsonFromAPI(
     },
   });
   const data = await response.json();
-  const dataParam = param ? data[param] : data;
-  return search && searchBy
-    ? dataParam.filter((item: any) =>
-        item[searchBy].toLowerCase().includes(search.toLowerCase())
-      )
-    : dataParam;
+  var dataParam = param ? data[param] : data;
+  return dataParam;
+}
+
+export async function getIdByName(
+  dir: string,
+  name: string,
+) {
+  const response = await fetch(url + "/v1" + dir + "/", {
+    method: "GET",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
+  });
+  var data = await response.json();
+  data = filterJsonEquals(data,[{key: "name", value: name}])
+  var id = data[0]["id"]
+  return id;
 }
 
 export async function getMonthTrainings(
@@ -40,34 +50,36 @@ export async function getMonthTrainings(
 export async function getWeightFromExercise(
   exerciseId?: number
 ): Promise<number> {
-  const response = await fetch(url + `/v1/lastWeightFromExercise/${exerciseId}/`, {
-    method: "GET",
-    headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
-    },
-  });
+  const response = await fetch(
+    url + `/v1/lastWeightFromExercise/${exerciseId}/`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("token")}`,
+      },
+    }
+  );
   const data = await response.json();
   return (await data).weight;
 }
 
 export async function setTraining(
   exercises: ExerciseTrain[],
-  templateId: number,
-){
+  templateId: number
+) {
   fetch(url + `/v1/createTraining/`, {
     method: "POST",
     headers: {
       Authorization: `Token ${localStorage.getItem("token")}`,
-      "Content-Type": 'application/json',
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({"templateId": templateId, "exercises": exercises}),
-  }).then(response => {
-    if (response.ok){
-      response.json()
+    body: JSON.stringify({ templateId: templateId, exercises: exercises }),
+  }).then((response) => {
+    if (response.ok) {
+      response.json();
     }
-  })
+  });
 }
-
 
 type Credentials = {
   username: string;
@@ -116,7 +128,7 @@ export const checkAuth = async (): Promise<boolean> => {
     headers: {
       Authorization: "Token " + localStorage.getItem("token"),
     },
-  })
+  });
 
-  return response.status == 200
+  return response.status == 200;
 };

@@ -2,6 +2,27 @@ export function calculateDaysInMonth(month: number, year: number) {
   return new Date(year, month, 0).getDate();
 };
 
+export function filterJsonEquals(json: any,filters?:{key:string, value:string}[]) {
+  if (!filters) return json
+  for (var i = 0; i < filters.length; i++) {
+    json = json.filter((item: any) =>
+      item[filters[i].key].toLowerCase() == (filters[i].value.toLowerCase())
+    );
+  }
+  return json
+};
+
+
+export function filterJsonIncludes(json: any,filters?:{key:string, value:string}[]) {
+  if (!filters) return json
+  for (var i = 0; i < filters.length; i++) {
+    json = json.filter((item: any) =>
+    item[filters[i].key].toLowerCase().includes(filters[i].value.toLowerCase())
+    );
+  }
+  return json
+};
+
 export enum phases {
   TrainingTemplates,
   WatchActualTraining,
