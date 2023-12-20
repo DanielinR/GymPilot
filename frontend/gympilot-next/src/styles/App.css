@@ -12,13 +12,13 @@
 
 /* Estilizando el thumb del scrollbar (la parte que se mueve) */
 ::-webkit-scrollbar-thumb {
-    background: #00ADB5; /* Color del thumb */
+    background: #38D1BD; /* Color del thumb */
     border-radius: 8px;
 }
 
 /* Cambio de color al pasar el ratón */
 ::-webkit-scrollbar-thumb:hover {
-    background: #008C93; /* Color del thumb al pasar el ratón */
+    background: #0C9987; /* Color del thumb al pasar el ratón */
 }
 
 /* quito los botones laterales para el input */

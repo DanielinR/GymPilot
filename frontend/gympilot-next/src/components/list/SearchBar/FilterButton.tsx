@@ -13,6 +13,7 @@ export default function FilterButton({ filter }: { filter: string }) {
   const selectOpt = (option: string) => {
     setIsOpen(false);
     setValue(option);
+    if (option == "") return
     const params = new URLSearchParams(searchParams);
     params.set(filter, option);
     replace(`${pathname}?${params.toString()}`);
