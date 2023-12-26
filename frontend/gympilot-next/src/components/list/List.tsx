@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import { getIdByName, getJsonFromAPI } from "@/libs/data";
 import { useSearchParams } from "next/navigation";
 import { filterJsonEquals, filterJsonIncludes } from "@/libs/utils";
+import PlusIcon from "../svg/PlusIcon";
 
 export default function List<T extends { id: number }>({
   tittle,
@@ -15,11 +16,13 @@ export default function List<T extends { id: number }>({
   jsonParam,
   searchBy,
   addButton = false,
+  createFunction,
   render,
   functionButtons,
 }: {
   tittle: string;
   tittleSize?: string;
+  createFunction?: Function;
   url: string;
   jsonParam?: string;
   searchBy: string;
@@ -70,11 +73,21 @@ export default function List<T extends { id: number }>({
   return (
     <div className="flex flex-col items-center pt-2 h-full w-full">
       <h2
-        className={`tittle text-white ${tittleSize} font-bold mb-5 text-center`}
+        className={`tittle text-white ${tittleSize} font-bold mb-5 text-center relative`}
       >
         {tittle}
+        {createFunction && (
+          <button
+            onClick={() => {
+              createFunction();
+            }}
+            className="absolute top-0 -right-2 translate-x-1/2 -translate-y-1/2 bg-brand-500 hover:bg-brand-700 rounded-full p-1 flex gap-2 items-center shadow-lg"
+          >
+            <PlusIcon className="w-8 h-8"></PlusIcon>
+          </button>
+        )}
       </h2>
-      <div className={`flex flex-col items-center gap-5 w-full max-h-full`}>
+      <div className={`relative flex flex-col items-center gap-5 w-full max-h-full h-full`}>
         <SearchBar
           filters={["template", "type"]}
           placeholder={`Search ${
@@ -85,7 +98,7 @@ export default function List<T extends { id: number }>({
         ></SearchBar>
         {addButton && <AddElementButton />}
         <div
-          style={{ height: "calc(100% - 190px - 100px)" }}
+          style={{ height: "calc(100% - 190px)" }}
           className="px-4 pt-1 pb-1 w-full h-[100%] overflow-auto"
         >
           <ListGrid<T>
@@ -94,7 +107,6 @@ export default function List<T extends { id: number }>({
             functionButtons={functionButtons}
           ></ListGrid>
         </div>
-        <button className="text-2xl shadowText text-white bg-brand-500 shadow-brand-900 rounded-lg py-4 px-7 mt-1 shadow-xl">CREATE</button>
       </div>
     </div>
   );

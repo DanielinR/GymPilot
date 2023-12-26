@@ -44,6 +44,38 @@ export async function deleteFromAPI(
   });
 }
 
+export async function createFromAPI(
+  dir: string,
+  data: Record<string, any>,
+  ) {
+  fetch(url + "/v1" + dir + "/", {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+}
+
+export async function setTraining(
+  exercises: ExerciseTrain[],
+  templateId: number
+) {
+  fetch(url + `/v1/createTraining/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ templateId: templateId, exercises: exercises }),
+  }).then((response) => {
+    if (response.ok) {
+      response.json();
+    }
+  });
+}
+
 export async function getIdByName(
   dir: string,
   name: string,
@@ -88,24 +120,6 @@ export async function getWeightFromExercise(
   );
   const data = await response.json();
   return (await data).weight;
-}
-
-export async function setTraining(
-  exercises: ExerciseTrain[],
-  templateId: number
-) {
-  fetch(url + `/v1/createTraining/`, {
-    method: "POST",
-    headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ templateId: templateId, exercises: exercises }),
-  }).then((response) => {
-    if (response.ok) {
-      response.json();
-    }
-  });
 }
 
 type Credentials = {

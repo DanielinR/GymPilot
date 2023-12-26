@@ -5,7 +5,6 @@ import ExerciseImage from "@/components/ExerciseDetails/ExericiseImage";
 import DeleteIcon from "@/components/svg/DeleteIcon";
 import GreaterThanIcon from "@/components/svg/GreaterThanIcon";
 import { deleteFromAPI, getJsonFromAPI, setJsonFromAPI } from "@/libs/data";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import ExerciseInfo from "@/components/ExerciseDetails/ExerciseInfo";
 import DeleteModal from "@/components/ExerciseDetails/DeleteModal";
@@ -62,7 +61,7 @@ export default function ExercisePage({
   }, [params.exercise]);
 
   return (
-    <div className="flex flex-col text-white w-full h-full items-center pt-12 md:pt-24 gap-6 md:gap-14 relative">
+    <div className="flex flex-col text-white w-full h-full items-center pt-6 md:pt-24 gap-6 md:gap-14 relative">
       <SelectIcon
         viewModal={viewIconSelection}
         selectAnswer={setIcon}
