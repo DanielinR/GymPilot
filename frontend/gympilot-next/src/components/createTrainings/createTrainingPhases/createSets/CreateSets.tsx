@@ -52,7 +52,7 @@ export default function CreateSets() {
   )?.sets;
   return (
     <div className="flex flex-col items-center justify-between h-full">
-      <CreateSetTopper />
+      <CreateSetTopper/>
       <div className="h-full w-full flex flex-col items-center justify-evenly p-7">
         <CreateSetsTittle />
         <div className="flex flex-col items-center gap-5 w-full">

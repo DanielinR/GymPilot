@@ -17,6 +17,33 @@ export async function getJsonFromAPI(
   return dataParam;
 }
 
+export async function setJsonFromAPI(
+  dir: string,
+  data: Record<string, any>,
+) {
+  const response = await fetch(url + "/v1" + dir + "/", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(data),
+  });
+  const responseData = await response.json();
+  return responseData;
+}
+
+export async function deleteFromAPI(
+  dir: string,
+) {
+  fetch(url + "/v1" + dir + "/", {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${localStorage.getItem("token")}`,
+    },
+  });
+}
+
 export async function getIdByName(
   dir: string,
   name: string,

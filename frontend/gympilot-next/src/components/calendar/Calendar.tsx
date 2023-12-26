@@ -37,8 +37,8 @@ function Calendar() {
         <ArrowIcon className='h-9 w-9 md:h-12 md:w-12 p-1 bg-brand-500 hover:bg-brand-700 shadow-md rounded-full rotate-180'></ArrowIcon>
         </button>
         <div>
-          <h2 className="text-2xl w-32 text-center">{monthNames[currentMonth - 1]}</h2>
-          <h2 className="text-center font-normal text-normal">{currentYear}</h2>
+          <h2 className="shadowText text-2xl w-32 text-center">{monthNames[currentMonth - 1]}</h2>
+          <h2 className="shadowText text-center font-normal text-normal">{currentYear}</h2>
         </div>
         <button onClick={() => {handleMonthsClick(+1)}}>
           <ArrowIcon className='h-9 w-9 p-1 md:h-12 md:w-12 bg-brand-500 hover:bg-brand-700 shadow-md rounded-full'></ArrowIcon>

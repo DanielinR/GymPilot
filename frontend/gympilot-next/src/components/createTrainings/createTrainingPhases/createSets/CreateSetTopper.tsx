@@ -4,7 +4,7 @@ import StopIcon from "@/components/svg/StopIcon";
 import { useState, useEffect } from "react";
 
 
-export default function CreateSetTopper({defaultTime2Wait = 95}:{defaultTime2Wait:number}) {
+export default function CreateSetTopper({defaultTime2Wait = 95}:{defaultTime2Wait?:number}) {
   const [onPlay, setOnPlay] = useState(false);
   const [timeLeft, setTimeLeft] = useState(defaultTime2Wait);
 

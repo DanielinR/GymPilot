@@ -11,7 +11,6 @@ import { filterJsonEquals, filterJsonIncludes } from "@/libs/utils";
 export default function List<T extends { id: number }>({
   tittle,
   tittleSize = "text-5xl",
-  listHeight,
   url,
   jsonParam,
   searchBy,
@@ -21,7 +20,6 @@ export default function List<T extends { id: number }>({
 }: {
   tittle: string;
   tittleSize?: string;
-  listHeight?: number;
   url: string;
   jsonParam?: string;
   searchBy: string;
@@ -34,16 +32,17 @@ export default function List<T extends { id: number }>({
 
   useEffect(() => {
     async function updateJsonResponse() {
-
       var finalUrl = url;
-      var finalJsonParam= jsonParam
-      const templateFilter = searchParams.get("template")?.toString()
+      var finalJsonParam = jsonParam;
+      const templateFilter = searchParams.get("template")?.toString();
       if (templateFilter) {
-        finalUrl = "/trainingTemplates/" + await getIdByName("/trainingTemplates", templateFilter);
-        finalJsonParam = "exercises"
-      }else{
-         finalJsonParam = jsonParam
-         finalUrl = url
+        finalUrl =
+          "/trainingTemplates/" +
+          (await getIdByName("/trainingTemplates", templateFilter));
+        finalJsonParam = "exercises";
+      } else {
+        finalJsonParam = jsonParam;
+        finalUrl = url;
       }
 
       var response = await getJsonFromAPI(finalUrl, finalJsonParam);
@@ -53,12 +52,14 @@ export default function List<T extends { id: number }>({
         response,
         searchString ? [{ key: searchBy, value: searchString }] : undefined
       );
-        
+
       var filters = Array.from(searchParams.entries()).map(([key, value]) => ({
         key,
         value,
       }));
-      filters = filters.filter(({key, }) => key !== "template" && key !== "search")
+      filters = filters.filter(
+        ({ key }) => key !== "template" && key !== "search"
+      );
       response = filterJsonEquals(response, filters);
       setJsonResponse(response);
     }
@@ -68,13 +69,12 @@ export default function List<T extends { id: number }>({
 
   return (
     <div className="flex flex-col items-center pt-2 h-full w-full">
-      <h2 className={`text-white ${tittleSize} font-bold mb-5 text-center`}>
+      <h2
+        className={`tittle text-white ${tittleSize} font-bold mb-5 text-center`}
+      >
         {tittle}
       </h2>
-      <div
-        style={{ height: `${listHeight}px` }}
-        className={`flex flex-col items-center gap-5 w-full`}
-      >
+      <div className={`flex flex-col items-center gap-5 w-full max-h-full`}>
         <SearchBar
           filters={["template", "type"]}
           placeholder={`Search ${
@@ -84,13 +84,17 @@ export default function List<T extends { id: number }>({
           }`}
         ></SearchBar>
         {addButton && <AddElementButton />}
-        <div className="px-4 pt-1 pb-1 w-full overflow-auto">
+        <div
+          style={{ height: "calc(100% - 190px - 100px)" }}
+          className="px-4 pt-1 pb-1 w-full h-[100%] overflow-auto"
+        >
           <ListGrid<T>
             json={jsonResponse}
             render={render}
             functionButtons={functionButtons}
           ></ListGrid>
         </div>
+        <button className="text-2xl shadowText text-white bg-brand-500 shadow-brand-900 rounded-lg py-4 px-7 mt-1 shadow-xl">CREATE</button>
       </div>
     </div>
   );

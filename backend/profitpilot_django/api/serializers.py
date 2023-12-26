@@ -7,7 +7,7 @@ class ExerciseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Exercise
-        fields = ['id', 'name', 'type', 'last_weight']
+        fields = ['id', 'name', 'type', 'icon', 'last_weight']
 
     def get_last_weight(self, obj):
         request = self.context.get("request")

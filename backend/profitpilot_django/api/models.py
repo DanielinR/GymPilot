@@ -22,6 +22,7 @@ class Exercise(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='exercises')
     type = models.ForeignKey(ExerciseType, on_delete=models.SET_NULL, null=True, blank=True, related_name='exercises')
     name = models.CharField(max_length=100)
+    icon = models.CharField(max_length=100, default="default.png")
 
     def __str__(self):
         return f"{self.name} ({self.type})"
@@ -35,6 +36,7 @@ class Exercise(models.Model):
 
     class Meta:
         unique_together = ('name', 'user',)
+        ordering = ['name']
 
 
 class TrainingTemplate(models.Model):

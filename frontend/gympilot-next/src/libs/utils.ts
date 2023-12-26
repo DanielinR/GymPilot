@@ -40,8 +40,11 @@ export type ExerciseTrain = {
 };
 
 export type Exercise = {
-  id: number,
-  name: string;
+    id: number;
+    name: string;
+    type: string;
+    last_weight: number;
+    icon: string;
 };
 
 export type Template = {
@@ -52,3 +55,7 @@ export type Template = {
 export const isMediumScreenOrLarger = () => {
   return window.innerWidth >= 768;
 };
+
+export function getIconsList():string[]{
+  return ["benchpress.png","deathlift.png","pullup.png"]
+} 
