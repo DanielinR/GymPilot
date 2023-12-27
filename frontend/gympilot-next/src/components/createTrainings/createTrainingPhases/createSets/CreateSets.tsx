@@ -4,7 +4,6 @@ import Setbox from "./SetBox";
 import CreateSetsTittle from "./CreateSetsTittle";
 import { useContext } from "react";
 import { TrainingContext } from "../../createTrainingContextProvider";
-import CreateSetTopper from "./CreateSetTopper";
 import CreateSetsButtons from "./CreateSetsButtons";
 
 export default function CreateSets() {
@@ -37,6 +36,9 @@ export default function CreateSets() {
         exercise: {
           id: actualExercise.id,
           name: actualExercise.name,
+          icon: "",
+          last_weight: 0,
+          type: "",
         },
         sets: [newSet],
       };
@@ -51,26 +53,23 @@ export default function CreateSets() {
     (exerciseTrain) => exerciseTrain.exercise.name === actualExercise?.name
   )?.sets;
   return (
-    <div className="flex flex-col items-center justify-between h-full">
-      <CreateSetTopper/>
-      <div className="h-full w-full flex flex-col items-center justify-evenly p-7">
-        <CreateSetsTittle />
-        <div className="flex flex-col items-center gap-5 w-full">
-          <SelectNumber
-            setNumber={setActualReps}
-            number={actualReps ? actualReps.toString() : ""}
-            selectionText="reps"
-            handleSelection={createSet}
-          />
-          <div className="flex justify-center items-center gap-4 w-fit bg-color-primary-strong p-4 rounded-md flex-wrap max-h-48 max-w-lg overflow-auto">
-            {currentExerciseSets && currentExerciseSets.length > 0 ? (
-              currentExerciseSets.map((item, index) => {
-                return <Setbox key={index} set={item}></Setbox>;
-              })
-            ) : (
-              <div className="w-14 h-20" />
-            )}
-          </div>
+    <div className="flex flex-col items-center justify-between h-full pt-5">
+      <CreateSetsTittle />
+      <div className="h-full p-7 flex flex-col items-center gap-5 w-full overflow-hidden">
+        <SelectNumber
+          setNumber={setActualReps}
+          number={actualReps ? actualReps.toString() : ""}
+          selectionText="reps"
+          handleSelection={createSet}
+        />
+        <div className="flex justify-center items-center gap-4 w-full h-full max-h-full bg-neutral-500 bg-opacity-40 p-4 rounded-md flex-wrap overflow-auto">
+          {currentExerciseSets && currentExerciseSets.length > 0 ? (
+            currentExerciseSets.map((item, index) => {
+              return <Setbox key={index} set={item}></Setbox>;
+            })
+          ) : (
+            <span className="text-3xl text-neutral-50 shadowText">No sets yet</span>
+          )}
         </div>
       </div>
       <CreateSetsButtons />

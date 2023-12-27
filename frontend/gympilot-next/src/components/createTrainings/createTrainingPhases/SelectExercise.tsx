@@ -9,19 +9,18 @@ export default function SelectExercise() {
   const { template, setActualExercise, setPhase, exercises } =
     useContext(TrainingContext)!;
 
-  const handleSelection = ({ id, name }: { id: number; name: string }) => {
-    setActualExercise({ id: id, name: name });
+  const handleSelection = (exercise: Exercise) => {
+    setActualExercise(exercise);
     setPhase(phases.Sets);
   };
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-between">
+    <div className="h-full w-full flex flex-col gap-5 items-center justify-between p-5">
       <List<Exercise>
         tittle={"What exercise do you want to do now?"}
         tittleSize="text-4xl"
         searchBy="name"
-        url={"/trainingTemplates/" + template?.id}
-        jsonParam="exercises"
+        url={"/exercises"}
         render={ExerciseElement}
         functionButtons={handleSelection}
         filters={["template", "type"]}

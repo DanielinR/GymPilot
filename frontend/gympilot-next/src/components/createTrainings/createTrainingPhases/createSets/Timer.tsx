@@ -4,7 +4,7 @@ import StopIcon from "@/components/svg/StopIcon";
 import { useState, useEffect } from "react";
 
 
-export default function CreateSetTopper({defaultTime2Wait = 95}:{defaultTime2Wait?:number}) {
+export default function Timer({defaultTime2Wait = 95}:{defaultTime2Wait?:number}) {
   const [onPlay, setOnPlay] = useState(false);
   const [timeLeft, setTimeLeft] = useState(defaultTime2Wait);
 
@@ -31,15 +31,15 @@ export default function CreateSetTopper({defaultTime2Wait = 95}:{defaultTime2Wai
   }, [onPlay])
 
   return (
-    <div className="bg-color-info-back h-20 w-48 rounded-md -translate-y-2 pt-4 flex flex-col items-center justify-center font-bold">
+    <div className="bg-neutral-500 text-white bg-opacity-90 px-8 py-3 gap-1 shadow-xl rounded-t-md flex flex-col items-center justify-center font-bold">
       <span className="text-4xl">{getMinutes()}:{getSeconds()}</span>
-      <div className="flex items-center justify-center bg-color-primary-strong w-full rounded-b-md">
-        <button onClick={handlePlayPause}>
-          {!onPlay && <PlayIcon className="text-color-secondary h-8 w-8" />}
-          {onPlay && <PauseIcon className="text-color-secondary h-8 w-8" />}
+      <div className="flex gap-2 items-center justify-center bg-color-primary-strong w-full rounded-b-md">
+        <button className="bg-brand-500 rounded-full p-1" onClick={handlePlayPause}>
+          {!onPlay && <PlayIcon className=" h-6 w-6" />}
+          {onPlay && <PauseIcon className=" h-6 w-6" />}
         </button>
-        <button onClick={handleStop}>
-          <StopIcon className="text-color-secondary h-8 w-8" />
+        <button className="bg-brand-500 rounded-full p-1" onClick={handleStop}>
+          <StopIcon className="h-6 w-6" />
         </button>
       </div>
     </div>

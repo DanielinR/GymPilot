@@ -73,7 +73,7 @@ export default function List<T extends { id: number }>({
   }, [jsonParam, url, searchParams, searchBy]);
 
   return (
-    <div className="flex flex-col items-center pt-2 h-full w-full">
+    <div className="flex flex-col items-center pt-5 h-full w-full overflow-hidden">
       <h2
         className={`tittle text-white ${tittleSize} font-bold mb-5 text-center relative`}
       >
@@ -89,7 +89,7 @@ export default function List<T extends { id: number }>({
           </button>
         )}
       </h2>
-      <div className={`relative flex flex-col items-center gap-5 w-full max-h-full h-full`}>
+      <div className={`relative flex flex-col items-center gap-5 w-full max-h-full h-full overflow-hidden`}>
         <SearchBar
           filters={filters}
           placeholder={`Search ${
@@ -100,8 +100,7 @@ export default function List<T extends { id: number }>({
         ></SearchBar>
         {addButton && <AddElementButton />}
         <div
-          style={{ height: "calc(100% - 190px)" }}
-          className="px-4 pt-1 pb-1 w-full h-[100%] overflow-auto"
+          className="px-4 pt-1 pb-1 w-full h-fit overflow-auto"
         >
           <ListGrid<T>
             json={jsonResponse}

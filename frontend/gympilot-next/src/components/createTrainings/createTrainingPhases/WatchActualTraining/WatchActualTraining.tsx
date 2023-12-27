@@ -16,17 +16,15 @@ export default function WatchActualTraining() {
   }
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-between">
-      <div className="bg-color-info-back h-20 w-48 rounded-md -translate-y-2 p-4 flex items-center justify-center font-bold">
-        <span className="text-4xl">{template?.name.toUpperCase()}</span>
-      </div>
+    <div className="h-full w-full flex flex-col items-center justify-between text-white pt-4">
+        <h1 className="tittle text-6xl">{template?.name.toUpperCase()}</h1>
       <div className="flex flex-col items-center justify-center gap-5">
-        <button
+        <button className="bg-brand-500 rounded-full"
           onClick={() => {
             setPhase(phases.Exercises);
           }}
         >
-          <PlusIcon className="text-color-secondary h-24 w-24" />
+          <PlusIcon className="h-16 w-16" />
         </button>
         <div className=" grid grid-cols-[3fr,1fr] gap-y-4 items-center w-full px-16">
           {exercises.map((item) => {
@@ -36,7 +34,7 @@ export default function WatchActualTraining() {
       </div>
       <button
         onClick={finishTraining}
-        className="bg-red-700 h-14 w-44 text-center flex items-center justify-center font-bold text-xl text-color-font rounded-full p-2 hover:bg-color-secondary-dark mb-16"
+        className="bg-error-500 h-14 shadowText w-44 text-center flex items-center justify-center font-bold text-xl rounded-full p-2 hover:bg-error-700 mb-16"
       >
         Finish training
       </button>

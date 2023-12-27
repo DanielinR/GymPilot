@@ -12,7 +12,7 @@ export default function BackButton({phaseToSet}:{phaseToSet:number}) {
           setPhase(phaseToSet);
         }}
       >
-        <BackIcon className="h-16 w-16 bg-color-secondary p-3 rounded-full text-color-font" />
+        <BackIcon className="h-16 w-16 bg-brand-500 p-3 rounded-full text-white" />
       </button>
     </div>
   );
