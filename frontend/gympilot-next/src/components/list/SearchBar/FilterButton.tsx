@@ -1,6 +1,6 @@
 import DisplayIcon from "@/components/svg/DisplayIcon";
 import XIcon from "@/components/svg/XIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import DropDownItems from "./DropdownItems";
 
@@ -8,9 +8,15 @@ export default function FilterButton({ filter }: { filter: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const [value, setValue] = useState(searchParams.get(filter)?.toString() || "");
+  const [value, setValue] = useState(
+    searchParams.get(filter)?.toString() || ""
+  );
   const [isOpen, setIsOpen] = useState(false);
-  const selectOpt = (option: {name:string}) => {
+  useEffect(() => {
+    setValue(searchParams.get(filter)?.toString() || "");
+  }, [pathname, searchParams, filter]);
+
+  const selectOpt = (option: { name: string }) => {
     setIsOpen(false);
     setValue(option.name);
     const params = new URLSearchParams(searchParams);
@@ -55,7 +61,10 @@ export default function FilterButton({ filter }: { filter: string }) {
         {value && <XIcon className="w-4 h-4"></XIcon>}
       </button>
       {isOpen && (
-        <DropDownItems filter={filter} selectFunction={selectOpt}></DropDownItems>
+        <DropDownItems
+          filter={filter}
+          selectFunction={selectOpt}
+        ></DropDownItems>
       )}
     </div>
   );

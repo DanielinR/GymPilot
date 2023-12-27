@@ -3,7 +3,7 @@
 import React, { createContext, useState, ReactNode, useEffect } from "react";
 import { phases, Template, ExerciseTrain, Exercise } from "@/libs/utils";
 import { getWeightFromExercise } from "@/libs/data";
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 type TrainingContextType = {
@@ -35,9 +35,20 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
   const [actualWeight, setActualWeight] = useState<number>();
   const [actualReps, setActualReps] = useState<number>();
   const [exercises, setExercises] = useState<ExerciseTrain[]>([]);
-  const router = useRouter()
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
+    function updateTemplateFilter() {
+      const params = new URLSearchParams(searchParams);
+      if (!template || phase != phases.Exercises) {
+        params.delete("template");
+      }else{
+        params.set("template", template.name);
+      }
+      router.replace(`${pathname}?${params.toString()}`);
+    }
     async function updateWeight() {
       if (!actualExercise) {
         return;
@@ -49,7 +60,8 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
       }
     }
     updateWeight();
-  }, [actualExercise]);
+    updateTemplateFilter();
+  }, [actualExercise, template, phase]);
 
   const value = {
     phase,
@@ -66,7 +78,7 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
     setActualReps,
     exercises,
     setExercises,
-    router
+    router,
   };
 
   return (

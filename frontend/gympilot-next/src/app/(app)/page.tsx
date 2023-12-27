@@ -2,6 +2,7 @@ import DayInfo from "@/components/Home/DayInfo";
 import InfoCard from "@/components/Home/InfoCard";
 import Calendar from "@/components/calendar/Calendar";
 import CalendarIcon from "@/components/svg/CalendarIcon";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -22,9 +23,9 @@ export default function Home() {
       <InfoCard tittle="Consecutive days" info="44"></InfoCard>
       <InfoCard tittle="Trained days" info="44"></InfoCard>
       <DayInfo></DayInfo>
-      <button className="shadowText bg-brand-500 hover:bg-brand-700 py-5 px-8 rounded-xl text-white text-4xl lg:text-5xl font-extrabold shadow-lg shadow-brand lg:col-start-2 lg:col-end-4 lg:m-0 lg:mb-0 mb-10 m-8">
+      <Link href={"/createTraining"} className="shadowText bg-brand-500 hover:bg-brand-700 flex items-center justify-center py-5 px-8 rounded-xl text-center text-white text-4xl lg:text-5xl font-extrabold shadow-lg shadow-brand lg:col-start-2 lg:col-end-4 lg:m-0 lg:mb-0 mb-10 m-8">
         <h2>TRAIN</h2>
-      </button>
+      </Link>
     </div>
   );
 }

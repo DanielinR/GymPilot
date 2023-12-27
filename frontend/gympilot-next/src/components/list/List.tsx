@@ -17,6 +17,7 @@ export default function List<T extends { id: number }>({
   searchBy,
   addButton = false,
   createFunction,
+  filters,
   render,
   functionButtons,
 }: {
@@ -25,6 +26,7 @@ export default function List<T extends { id: number }>({
   createFunction?: Function;
   url: string;
   jsonParam?: string;
+  filters?:string[];
   searchBy: string;
   addButton?: boolean;
   render: (item: T, functionButtons?: (item: T) => void) => React.ReactNode;
@@ -89,7 +91,7 @@ export default function List<T extends { id: number }>({
       </h2>
       <div className={`relative flex flex-col items-center gap-5 w-full max-h-full h-full`}>
         <SearchBar
-          filters={["template", "type"]}
+          filters={filters}
           placeholder={`Search ${
             tittle.endsWith("?")
               ? tittle.slice(0, -1).toLowerCase()

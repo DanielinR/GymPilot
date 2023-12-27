@@ -1,5 +1,5 @@
 import List from "@/components/list/List";
-import ListElement from "@/components/list/ListElementFunction";
+import ExerciseElement from "@/components/list/ExerciseElement";
 import { useContext } from "react";
 import { TrainingContext } from "../createTrainingContextProvider";
 import { Exercise, phases } from "@/libs/utils";
@@ -15,18 +15,23 @@ export default function SelectExercise() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-between p-4 pt-32 pb-1">
+    <div className="h-full w-full flex flex-col items-center justify-between">
       <List<Exercise>
         tittle={"What exercise do you want to do now?"}
         tittleSize="text-4xl"
         searchBy="name"
         url={"/trainingTemplates/" + template?.id}
         jsonParam="exercises"
-        render={ListElement}
+        render={ExerciseElement}
         functionButtons={handleSelection}
+        filters={["template", "type"]}
       ></List>
-      {(!exercises || exercises.length == 0) && <BackButton phaseToSet={phases.TrainingTemplates}/>}
-      {(exercises && exercises.length !== 0) && <BackButton phaseToSet={phases.WatchActualTraining}/>}
+      {(!exercises || exercises.length == 0) && (
+        <BackButton phaseToSet={phases.TrainingTemplates} />
+      )}
+      {exercises && exercises.length !== 0 && (
+        <BackButton phaseToSet={phases.WatchActualTraining} />
+      )}
     </div>
   );
 }

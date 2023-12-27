@@ -13,7 +13,7 @@ export default function ExercisesPage() {
 
   return (
     <div className="p-5 w-full h-full">
-      <List<Exercise> tittle="Exercises" url="/exercises" createFunction={createExercise} searchBy="name" render={ExerciseElement}></List>
+      <List<Exercise> tittle="Exercises" url="/exercises" createFunction={createExercise} searchBy="name" render={ExerciseElement} filters={["template", "type"]}></List>
     </div>
   );
 }
