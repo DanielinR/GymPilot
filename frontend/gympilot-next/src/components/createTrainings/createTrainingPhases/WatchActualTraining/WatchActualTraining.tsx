@@ -41,8 +41,3 @@ export default function WatchActualTraining() {
     </div>
   );
 }
-
-type Exercise = {
-  id: number;
-  name: string;
-};

@@ -10,10 +10,12 @@ import { checkAuth } from "@/libs/data";
 import UserIcon from "@/components/svg/UserIcon";
 import KeyIcon from "@/components/svg/KeyIcon";
 import LogoWithLetters from "@/components/LogoWithLetters";
+import ErrorIcon from "@/components/svg/ErrorIcon";
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(false);
   const router = useRouter()
 
   useEffect(() => {
@@ -37,8 +39,12 @@ export default function LoginPage() {
           <span className="font-bold text-5xl text-white pb-6">Sign in</span>
           <LoginInput setValue={setUsername} tittle="Username" type="text" SvgIcon={UserIcon} />
           <LoginInput setValue={setPassword} tittle="Password" type="password" SvgIcon={KeyIcon} />
+          {errorMessage && <div className=" bg-error-300 px-2 py-1 rounded-lg flex gap-2 items-center">
+            <ErrorIcon className="h-7 w-7 text-error-700"></ErrorIcon>
+            <span className="text-error-700 font-bold text-xl">Invalid credentials</span>
+          </div>}
         </div>
-        <LoginButton username={username} password={password} />
+        <LoginButton username={username} password={password} setError={setErrorMessage}/>
       </form>
     </div>
   );
