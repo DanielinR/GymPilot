@@ -6,6 +6,7 @@ import DumbellIcon from "../svg/DumbellIcon";
 import LogoWithLetters from "../LogoWithLetters";
 import Image from "next/image";
 import StatsIcon from "../svg/StatsIcon";
+import TablesIcon from "../svg/TablesIcon";
 
 export default function NavbarContent({ isOpen, selectOption }: { isOpen: Boolean, selectOption: Function }) {
   return (
@@ -17,6 +18,7 @@ export default function NavbarContent({ isOpen, selectOption }: { isOpen: Boolea
       <div className="flex flex-col gap-2">
         <NavbarLink tittle={isOpen ? "Home" : ""} link="/" selectOption={selectOption} SvgIcon={HomeIcon}></NavbarLink>
         <NavbarLink tittle={isOpen ? "Exercises" : ""} link="/exercises" selectOption={selectOption} SvgIcon={DumbellIcon}></NavbarLink>
+        <NavbarLink tittle={isOpen ? "Routines" : ""} link="/routines" selectOption={selectOption} SvgIcon={TablesIcon}></NavbarLink>
         <NavbarLink tittle={isOpen ? "Stats" : ""} link="/stats" selectOption={selectOption} SvgIcon={StatsIcon}></NavbarLink>
       </div>
     </div>

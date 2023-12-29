@@ -7,7 +7,7 @@ export default function DeleteModal({ viewModal, selectAnswer }: { viewModal: bo
     >
       <div className=" w-fit bg-neutral-900 bg-opacity-70 outline-color-secondary outline rounded-md flex flex-col items-center justify-center p-6">
         <h2 className="shadowText text-color-font text-3xl text-center font-bold">
-          Delete exercise
+          Deleting
         </h2>
         <h3 className="shadowText text-color-font text-xl text-center pb-6 font-light">
           This action cannot be undone.

@@ -33,7 +33,6 @@ class ExerciseTypeViewSet(viewsets.ModelViewSet):
 
 
 class MonthTrainedDays(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, year, month):
         month_trainings = models.Training.objects.filter(
@@ -47,7 +46,6 @@ class MonthTrainedDays(views.APIView):
 
 
 class LastWeightFromExercise(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, exercise_id):
         exercise = models.Exercise.objects.get(id=exercise_id)
@@ -56,7 +54,6 @@ class LastWeightFromExercise(views.APIView):
 
 
 class CreateTraining(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
 
     def create_sets_from_exercise(self, sets_json, exercise_id, training):
         for set in sets_json:
@@ -85,8 +82,53 @@ class CreateTraining(views.APIView):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+class AddExercise(views.APIView):
+
+    @transaction.atomic
+    def put(self, request, template_id):
+        try:
+            if request is None or request.data is None: return Response({"error": "Not exercises included"},
+                                                                 status=status.HTTP_400_BAD_REQUEST)
+
+            data_json = request.data
+            exercise = models.Exercise.objects.get(id=data_json["id"])
+            template = models.TrainingTemplate.objects.get(id=template_id)
+            template.exercises.add(exercise)
+            template.save
+            return Response({"status": "success"}, status=status.HTTP_200_OK)
+
+        except models.TrainingTemplate.DoesNotExist:
+            return Response({"error": "Training template not found"}, status=status.HTTP_404_NOT_FOUND)
+        except models.Exercise.DoesNotExist:
+            return Response({"error": "Exercise not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class DeleteExercise(views.APIView):
+
+    @transaction.atomic
+    def put(self, request, template_id):
+        try:
+            if request is None or request.data is None: return Response({"error": "Not exercises included"},
+                                                                 status=status.HTTP_400_BAD_REQUEST)
+
+            data_json = request.data
+            exercise = models.Exercise.objects.get(id=data_json["id"])
+            template = models.TrainingTemplate.objects.get(id=template_id)
+            template.exercises.remove(exercise)
+            template.save
+            return Response({"status": "success"}, status=status.HTTP_200_OK)
+
+        except models.TrainingTemplate.DoesNotExist:
+            return Response({"error": "Training template not found"}, status=status.HTTP_404_NOT_FOUND)
+        except models.Exercise.DoesNotExist:
+            return Response({"error": "Exercise not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 class CheckAuth(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
         return Response({"status": "success"}, status=status.HTTP_200_OK)

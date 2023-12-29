@@ -48,7 +48,7 @@ export async function createFromAPI(
   dir: string,
   data: Record<string, any>,
   ) {
-  fetch(url + "/v1" + dir + "/", {
+  const response = await fetch(url + "/v1" + dir + "/", {
     method: "POST",
     headers: {
       Authorization: `Token ${localStorage.getItem("token")}`,
@@ -56,6 +56,7 @@ export async function createFromAPI(
     },
     body: JSON.stringify(data),
   });
+  return await response.json()
 }
 
 export async function setTraining(

@@ -2,7 +2,7 @@ import List from "@/components/list/List";
 import ListElement from "@/components/list/ListElementFunction";
 import { useContext } from "react";
 import { TrainingContext } from "../createTrainingContextProvider";
-import { phases } from "@/libs/utils";
+import { Template, phases } from "@/libs/utils";
 
 export default function SelectTemplate() {
   const { setPhase, setTemplate } = useContext(TrainingContext)!;
@@ -13,7 +13,7 @@ export default function SelectTemplate() {
   };
   return (
     <div className="h-full w-full flex items-center p-5">
-        <List<TrainingTemplate>
+        <List<Template>
           tittle={"What workout will you do today?"}
           tittleSize="text-4xl"
           searchBy="name"
@@ -24,8 +24,3 @@ export default function SelectTemplate() {
     </div>
   );
 }
-
-type TrainingTemplate = {
-  id: number;
-  name: string;
-};

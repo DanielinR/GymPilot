@@ -43,7 +43,7 @@ class TrainingTemplate(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='trainingTemplates')
     name = models.CharField(max_length=100)
-    exercises = models.ManyToManyField(Exercise, related_name='trainingTemplates')
+    exercises = models.ManyToManyField(Exercise, blank=True, null=True, related_name='trainingTemplates')
 
     def __str__(self):
         return f"{self.name}"

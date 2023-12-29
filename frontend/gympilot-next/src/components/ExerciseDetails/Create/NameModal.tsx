@@ -12,7 +12,7 @@ export default function NameModal({
 
   return (
     <div
-      className={`absolute z-50 bg-neutral-900 bg-opacity-80 py-28 px-5 flex items-center justify-center mt-10 w-[90%] rounded-xl ${
+      className={`absolute z-50 bg-neutral-900 bg-opacity-80 py-28 px-5 flex items-center justify-center mt-10 w-[90%] rounded-xl text-white ${
         viewModal ? "" : "hidden"
       }`}
     >

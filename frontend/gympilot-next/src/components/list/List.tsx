@@ -2,7 +2,6 @@
 
 import SearchBar from "./SearchBar/SearchBar";
 import ListGrid from "@/components/list/ListGrid";
-import AddElementButton from "./AddElementButton";
 import React, { useState, useEffect } from "react";
 import { getIdByName, getJsonFromAPI } from "@/libs/data";
 import { useSearchParams } from "next/navigation";
@@ -15,7 +14,6 @@ export default function List<T extends { id: number }>({
   url,
   jsonParam,
   searchBy,
-  addButton = false,
   createFunction,
   filters,
   render,
@@ -28,7 +26,6 @@ export default function List<T extends { id: number }>({
   jsonParam?: string;
   filters?:string[];
   searchBy: string;
-  addButton?: boolean;
   render: (item: T, functionButtons?: (item: T) => void) => React.ReactNode;
   functionButtons?: (item: T) => void;
 }) {
@@ -98,7 +95,6 @@ export default function List<T extends { id: number }>({
               : tittle.toLowerCase()
           }`}
         ></SearchBar>
-        {addButton && <AddElementButton />}
         <div
           className="px-4 pt-1 pb-1 w-full h-fit overflow-auto"
         >
