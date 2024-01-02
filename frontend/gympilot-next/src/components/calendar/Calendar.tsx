@@ -1,17 +1,16 @@
 "use client";
 
 import React, { useState, useEffect} from 'react';
-import Image from 'next/image';
+import { monthNames } from '@/libs/utils';
 import CalendarDay from "./Calendar-day"
 import { calculateDaysInMonth } from '@/libs/utils'; "../libs/utils"
 import { getMonthTrainings } from '@/libs/data';
 import ArrowIcon from '../svg/ArrowIcon';
 
-function Calendar() {
+function Calendar({setSelectedDate = ()=>{}}:{setSelectedDate?:Function}) {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [daysInMonth, setdaysInMonth] = useState(0);
-  const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
   const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
   const [trainedDays, setTrainedDays] = useState<number[]>([])
 
@@ -28,6 +27,9 @@ function Calendar() {
     if(month == 13){month = 1; setCurrentYear(currentYear + 1)};
     if(month == 0){month = 12; setCurrentYear(currentYear - 1)};
     setCurrentMonth(month);  
+  }
+  function selectDay(day:number) {
+    setSelectedDate({day: day, month: currentMonth, year: currentYear})
   }
 
   return (
@@ -56,6 +58,7 @@ function Calendar() {
                   day={index + 1} 
                   trained={trainedDays ? trainedDays.includes(index + 1) : false}
                   exist={index < daysInMonth} 
+                  selectDay={selectDay}
               />
           ))}
       </div>

@@ -1,10 +1,15 @@
+"use client";
+
 import DayInfo from "@/components/Home/DayInfo";
 import InfoCard from "@/components/Home/InfoCard";
 import Calendar from "@/components/calendar/Calendar";
 import CalendarIcon from "@/components/svg/CalendarIcon";
 import Link from "next/link";
+import { useState } from "react";
+import { SimpleDate } from "@/libs/utils";
 
 export default function Home() {
+  const [selectedDate, setSelectedDate] = useState<SimpleDate>();
   return (
     <div className="grid grid-rows-[7fr_2fr_3fr] lg:grid-rows-4 lg:grid-cols-[3fr_1fr_1fr] h-full w-full gap-8 p-8">
       <div className="lg:row-start-1 lg:row-end-4 bg-neutral-500 rounded-lg flex items-center justify-center flex-col bg-opacity-90">
@@ -14,7 +19,7 @@ export default function Home() {
             TRAINING CALENDAR
           </h2>
         </div>
-        <Calendar />
+        <Calendar setSelectedDate={setSelectedDate}/>
       </div>
       <InfoCard tittle="Kg lifted" info="44"></InfoCard>
       <InfoCard tittle="Consecutive days" info="44"></InfoCard>
@@ -22,7 +27,7 @@ export default function Home() {
       <InfoCard tittle="Kg lifted" info="44"></InfoCard>
       <InfoCard tittle="Consecutive days" info="44"></InfoCard>
       <InfoCard tittle="Trained days" info="44"></InfoCard>
-      <DayInfo></DayInfo>
+      <DayInfo date={selectedDate}></DayInfo>
       <Link href={"/createTraining"} className="shadowText bg-brand-500 hover:bg-brand-700 flex items-center justify-center py-5 px-8 rounded-xl text-center text-white text-4xl lg:text-5xl font-extrabold shadow-lg shadow-brand lg:col-start-2 lg:col-end-4 lg:m-0 lg:mb-0 mb-10 m-8">
         <h2>TRAIN</h2>
       </Link>

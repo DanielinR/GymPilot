@@ -41,9 +41,18 @@ class TrainingTemplateSerializer(serializers.ModelSerializer):
 
 
 class TrainingSerializer(serializers.ModelSerializer):
+    trainingTemplate = serializers.SerializerMethodField()
+    date = serializers.SerializerMethodField()
+
     class Meta:
         model = models.Training
         fields = ['id', 'trainingTemplate', 'date']
+
+    def get_trainingTemplate(self, obj):
+        return obj.trainingTemplate.name
+
+    def get_date(self, obj):
+        return obj.date.date()
 
 
 class SetSerializer(serializers.ModelSerializer):
