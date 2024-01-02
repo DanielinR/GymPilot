@@ -24,7 +24,7 @@ export default function List<T extends { id: number }>({
   createFunction?: Function;
   url: string;
   jsonParam?: string;
-  filters?:string[];
+  filters?: string[];
   searchBy: string;
   render: (item: T, functionButtons?: (item: T) => void) => React.ReactNode;
   functionButtons?: (item: T) => void;
@@ -33,19 +33,19 @@ export default function List<T extends { id: number }>({
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    let isSubscribed = true;
+
     async function updateJsonResponse() {
       var finalUrl = url;
       var finalJsonParam = jsonParam;
       const templateFilter = searchParams.get("template")?.toString();
-      if (templateFilter) {
-        finalUrl =
-          "/trainingTemplates/" +
-          (await getIdByName("/trainingTemplates", templateFilter));
-        finalJsonParam = "exercises";
-      } else {
-        finalJsonParam = jsonParam;
-        finalUrl = url;
-      }
+      finalUrl = templateFilter
+        ? `/trainingTemplates/${await getIdByName(
+            "/trainingTemplates",
+            templateFilter
+          )}`
+        : url;
+      finalJsonParam = templateFilter ? "exercises" : jsonParam;
 
       var response = await getJsonFromAPI(finalUrl, finalJsonParam);
 
@@ -63,11 +63,16 @@ export default function List<T extends { id: number }>({
         ({ key }) => key !== "template" && key !== "search"
       );
       response = filterJsonEquals(response, filters);
-      setJsonResponse(response);
+      if (isSubscribed) {
+        setJsonResponse(response);
+      }
     }
 
     updateJsonResponse();
-  }, [jsonParam, url, searchParams, searchBy]);
+    return () => {
+      isSubscribed = false;
+    };
+  }, [searchParams, jsonParam, url, searchBy]);
 
   return (
     <div className="flex flex-col items-center pt-5 h-full w-full overflow-hidden">
@@ -86,7 +91,9 @@ export default function List<T extends { id: number }>({
           </button>
         )}
       </h2>
-      <div className={`relative flex flex-col items-center gap-5 w-full max-h-full h-full overflow-hidden`}>
+      <div
+        className={`relative flex flex-col items-center gap-5 w-full max-h-full h-full overflow-hidden`}
+      >
         <SearchBar
           filters={filters}
           placeholder={`Search ${
@@ -95,9 +102,7 @@ export default function List<T extends { id: number }>({
               : tittle.toLowerCase()
           }`}
         ></SearchBar>
-        <div
-          className="px-4 pt-1 pb-1 w-full h-fit overflow-auto"
-        >
+        <div className="px-4 pt-1 pb-1 w-full h-fit overflow-auto">
           <ListGrid<T>
             json={jsonResponse}
             render={render}
