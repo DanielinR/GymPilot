@@ -2,7 +2,7 @@ import { Set } from "@/libs/utils";
 
 export default function Setbox({ set }: { set: Set }) {
   return (
-    <div className="flex flex-col text-white">
+    <div className="flex flex-col text-white items-center">
       <div className="bg-neutral-700 h-20 w-14 flex flex-col items-center justify-center font-bold text-3xl rounded-md leading-3">
         <span>{set.reps}</span>
         <span className="text-xl font-normal">reps</span>

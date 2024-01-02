@@ -50,7 +50,7 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
       router.replace(`${pathname}?${params.toString()}`);
     }
     async function updateWeight() {
-      if (!actualExercise) {
+      if (!actualExercise || phase != phases.Sets) {
         return;
       }
       const newWeight = await getWeightFromExercise(actualExercise?.id);
