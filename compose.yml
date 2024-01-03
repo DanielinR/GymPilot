@@ -1,0 +1,37 @@
+services:
+  next:
+    image: gympilot-next
+    build: ./frontend/gympilot-next
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - django
+
+  django:
+    image: gympilot-django
+    build: ./backend/profitpilot_django 
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/profitpilot_django/profitpilot_django/.env
+    volumes:
+      - ./backend:/app 
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16.1
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./backend/profitpilot_django/profitpilot_django/.env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

@@ -10,7 +10,7 @@ import XIcon from "@/components/svg/XIcon";
 import { deleteFromAPI, getJsonFromAPI, setJsonFromAPI } from "@/libs/data";
 import { Exercise, Template } from "@/libs/utils";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function RoutinePage({
   params,
@@ -46,13 +46,13 @@ export default function RoutinePage({
     );
     updateExercises();
   };
-  async function updateExercises() {
+  const updateExercises = useCallback(async () => {
     const response = await getJsonFromAPI(
       "/trainingTemplates/" + params.routine,
       "exercises"
     );
     setExercises(response);
-  }
+  },[params.routine])
   useEffect(() => {
     async function updateName() {
       const response = await getJsonFromAPI(
