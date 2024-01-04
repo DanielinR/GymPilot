@@ -28,7 +28,7 @@ export default function Timer({defaultTime2Wait = 95}:{defaultTime2Wait?:number}
       setTimeLeft(prevTime => prevTime - 1);
     }, 1000);
     return () => clearInterval(interval);
-  }, [onPlay])
+  }, [onPlay, timeLeft])
 
   return (
     <div className="bg-neutral-500 text-white bg-opacity-90 px-8 py-3 gap-1 shadow-xl rounded-t-md flex flex-col items-center justify-center font-bold">

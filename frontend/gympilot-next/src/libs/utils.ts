@@ -81,8 +81,8 @@ export const monthNames = [
   "December",
 ];
 
-export const isMediumScreenOrLarger = () => {
-  return window.innerWidth >= 768;
+export const isMediumScreenOrLarger = (width:number) => {
+  return width >= 768;
 };
 
 export function getIconsList(): string[] {

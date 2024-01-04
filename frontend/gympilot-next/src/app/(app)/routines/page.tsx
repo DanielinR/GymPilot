@@ -8,7 +8,7 @@ import { Template } from "@/libs/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function routinesPage() {
+export default function RoutinesPage() {
     const router = useRouter();
     const pathname = usePathname();
     const [viewCreateModal, setViewCreateModal] = useState(false)

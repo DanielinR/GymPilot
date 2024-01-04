@@ -61,7 +61,7 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
     }
     updateWeight();
     updateTemplateFilter();
-  }, [actualExercise, template, phase]);
+  }, [actualExercise, template, phase, pathname, router,searchParams]);
 
   const value = {
     phase,

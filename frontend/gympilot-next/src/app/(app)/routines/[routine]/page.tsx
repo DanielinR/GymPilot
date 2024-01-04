@@ -63,7 +63,7 @@ export default function RoutinePage({
     }
     updateExercises();
     updateName();
-  }, [params.routine]);
+  }, [params.routine,updateExercises]);
 
   return (
     <div className="h-full w-full flex items-center justify-center overflow-hidden flex-col text-white relative pt-6 md:pt-24 gap-8 md:gap-14">
