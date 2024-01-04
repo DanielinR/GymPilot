@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '192.168.1.61']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '192.168.1.61','api.danielin.xyz', 'danielin.xyz']
 
 # Application definition
 
@@ -73,6 +73,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", # React en localhost
     "http://127.0.0.1:3000", # React en 127.0.0.1
     "http://192.168.1.61:3000", # React en la IP local
+    "https://gympilot.danielin.xyz",
+    "https://gym-pilot.vercel.app",
 ]
 
 ROOT_URLCONF = 'profitpilot_django.urls'

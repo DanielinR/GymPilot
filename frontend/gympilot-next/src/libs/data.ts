@@ -1,6 +1,6 @@
 import { ExerciseTrain, filterJsonEquals } from "./utils";
 
-const url = "api.danieln.xyz/api";
+const url = "http://api.danieln.xyz/api";
 
 export async function getJsonFromAPI(
   dir: string,
