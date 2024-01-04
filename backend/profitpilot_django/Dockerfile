@@ -1,7 +1,8 @@
-FROM python:3.10
+FROM python:3.10-alpine
 WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN pip install --upgrade pip
+RUN apk add --no-cache postgresql-dev gcc python3-dev musl-dev
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 ENV PYTHONUNBUFFERED 1
@@ -12,4 +13,4 @@ ENV POSTGRES_HOST postgres
 # ENV DATABASE_URL ...
 
 # Expone el puerto en el que corre tu aplicación Django
-EXPOSE 8000
+EXPOSE 8001
