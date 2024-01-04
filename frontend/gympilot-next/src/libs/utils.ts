@@ -81,7 +81,8 @@ export const monthNames = [
   "December",
 ];
 
-export const isMediumScreenOrLarger = (width:number) => {
+export const isMediumScreenOrLarger = (width:number|undefined) => {
+  if (!width) return
   return width >= 768;
 };
 

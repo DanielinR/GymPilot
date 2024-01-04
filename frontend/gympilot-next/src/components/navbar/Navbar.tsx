@@ -1,23 +1,31 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavbarButton from './NavbarButton';
 import NavbarContent from './NavbarContent';
 import LogoutButton from './LogoutButton';
 import { isMediumScreenOrLarger } from '@/libs/utils';
+import useWindowDimensions from '@/libs/useWindowDimensions';
 
 export default function Navbar() {
-  var sidebarOpen = localStorage.getItem('sidebarOpen');
-  if (isMediumScreenOrLarger() && sidebarOpen == null) {sidebarOpen = "true"}
-  const [isOpen, setIsOpen] = useState(sidebarOpen === 'true');
+  const { width, height } = useWindowDimensions();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(()=>{
+    var sidebarOpen = localStorage.getItem('sidebarOpen');
+    if (isMediumScreenOrLarger(width) && sidebarOpen == null) {sidebarOpen = "true"}
+    setIsOpen(sidebarOpen === 'true');
+  },[width])
 
   const handleNavClick = () => {
     const newState = !isOpen;
     setIsOpen(newState);
-    isMediumScreenOrLarger() && localStorage.setItem('sidebarOpen', newState.toString());
+    isMediumScreenOrLarger(width) && localStorage.setItem('sidebarOpen', newState.toString());
+    setIsOpen(newState);
   }
+  
   const selectOption = () => {
-    if (isMediumScreenOrLarger()) return
+    if (isMediumScreenOrLarger(width)) return
     setIsOpen(false);
   }
 
