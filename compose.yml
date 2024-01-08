@@ -6,8 +6,6 @@ services:
       target: runner
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/app
     depends_on:
       - django
 
@@ -21,8 +19,6 @@ services:
       - "8000:8001"
     env_file:
       - ./backend/profitpilot_django/profitpilot_django/.env
-    volumes:
-      - ./backend:/app 
     depends_on:
       - postgres
 
