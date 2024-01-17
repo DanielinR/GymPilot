@@ -1,6 +1,6 @@
 import { ExerciseTrain, filterJsonEquals } from "./utils";
 
-const url = "https://api.danielin.xyz/api";
+const url = process.env.API_URL || "https://api.danielin.xyz/api"
 
 export async function getJsonFromAPI(
   dir: string,
