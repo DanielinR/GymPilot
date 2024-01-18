@@ -28,7 +28,7 @@ export const TrainingContext = createContext<TrainingContextType | undefined>(
 );
 
 export function TrainingProvider({ children }: { children: ReactNode }) {
-  const [phase, setPhase] = useState(phases.TrainingTemplates);
+  const [phase, setPhasePrivate] = useState(phases.TrainingTemplates);
   const [template, setTemplate] = useState<Template>();
   const [actualExercise, setActualExercise] = useState<Exercise>();
   const [viewModal, setViewModal] = useState(false);
@@ -39,15 +39,21 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const setPhase = (phase:phases) => {
+    if (template){
+      const params = new URLSearchParams(searchParams);
+      params.set("template", template.name);
+      router.replace(`${pathname}?${params.toString()}`);
+    }
+    setPhasePrivate(phase)
+  }
   useEffect(() => {
-    function updateTemplateFilter() {
+    function deleteTemplateFilter() {
       const params = new URLSearchParams(searchParams);
       if (!template || phase != phases.Exercises) {
         params.delete("template");
-      }else{
-        params.set("template", template.name);
+        router.replace(`${pathname}?${params.toString()}`);
       }
-      router.replace(`${pathname}?${params.toString()}`);
     }
     async function updateWeight() {
       if (!actualExercise || phase != phases.Sets) {
@@ -60,7 +66,7 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
       }
     }
     updateWeight();
-    updateTemplateFilter();
+    deleteTemplateFilter();
   }, [actualExercise, template, phase, pathname, router,searchParams]);
 
   const value = {

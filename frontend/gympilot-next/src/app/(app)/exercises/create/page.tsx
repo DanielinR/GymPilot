@@ -31,7 +31,6 @@ export default function CrateExercisePage() {
       createFromAPI("/exercises", exercise)
       router.push("/exercises")
     } catch (error) {
-      console.log(error)
     }
   };
   const setIcon = (icon: string) => {

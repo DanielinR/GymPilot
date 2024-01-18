@@ -55,14 +55,14 @@ export default function List<T extends { id: number }>({
         searchString ? [{ key: searchBy, value: searchString }] : undefined
       );
 
-      var filters = Array.from(searchParams.entries()).map(([key, value]) => ({
+      var filtersURL = Array.from(searchParams.entries()).map(([key, value]) => ({
         key,
         value,
       }));
-      filters = filters.filter(
+      filtersURL = filtersURL.filter(
         ({ key }) => key !== "template" && key !== "search"
       );
-      response = filterJsonEquals(response, filters);
+      response = filterJsonEquals(response, filtersURL);
       if (isSubscribed) {
         setJsonResponse(response);
       }
