@@ -20,9 +20,13 @@ export default function LoginPage() {
 
   useEffect(() => {
     const verifyAuth = async () => {
-      const isAuth = await checkAuth();
-      if (isAuth) {
-        router.push('/');
+      try {
+        const isAuth = await checkAuth();
+        if (isAuth) {
+          router.push('/');
+        }
+      } catch (error) {
+        router.push("/error")
       }
     };
 

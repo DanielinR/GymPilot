@@ -8,9 +8,13 @@ export default function CheckLogin({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const verifyAuth = async () => {
-            const isAuth = await checkAuth();
-            if (!isAuth) {
-                router.push('/login');
+            try {
+                const isAuth = await checkAuth();
+                if (!isAuth) {
+                    router.push('/login');
+                }
+            } catch (error) {
+                router.push("/error")
             }
         };
 
