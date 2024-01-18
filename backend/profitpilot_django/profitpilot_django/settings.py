@@ -154,7 +154,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Security settings
 SECURE_HSTS_SECONDS = 31536000  # 1 year
-SECURE_SSL_REDIRECT = env('SSL_REDIRECT', default='False')
+SECURE_SSL_REDIRECT = env('SSL_REDIRECT', default='False') == "True"
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True

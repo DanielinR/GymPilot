@@ -11,25 +11,55 @@ class ExerciseViewSet(viewsets.ModelViewSet):
     queryset = models.Exercise.objects.all()
     serializer_class = serializers.ExerciseSerializer
 
+    def get_queryset(self):
+        return models.Exercise.objects.filter(user=self.request.user) | models.Exercise.objects.filter(user=None)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class TrainingTemplateViewSet(viewsets.ModelViewSet):
     queryset = models.TrainingTemplate.objects.all()
     serializer_class = serializers.TrainingTemplateSerializer
+
+    def get_queryset(self):
+        return models.TrainingTemplate.objects.filter(user=self.request.user) | models.TrainingTemplate.objects.filter(user=None)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class TrainingViewSet(viewsets.ModelViewSet):
     queryset = models.Training.objects.all()
     serializer_class = serializers.TrainingSerializer
 
+    def get_queryset(self):
+        return models.Training.objects.filter(user=self.request.user) | models.Training.objects.filter(user=None)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class SetViewSet(viewsets.ModelViewSet):
     queryset = models.Set.objects.all()
     serializer_class = serializers.SetSerializer
 
+    def get_queryset(self):
+        return models.Set.objects.filter(user=self.request.user) | models.Set.objects.filter(user=None)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class ExerciseTypeViewSet(viewsets.ModelViewSet):
     queryset = models.ExerciseType.objects.all()
     serializer_class = serializers.ExerciseTypeSerializer
+
+    def get_queryset(self):
+        return models.ExerciseType.objects.filter(user=self.request.user) | models.ExerciseType.objects.filter(user=None)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 class MonthTrainedDays(views.APIView):
