@@ -21,6 +21,7 @@ export default function SelectNumber({
           max={999}
           required
           placeholder="0"
+          step={0.01}
           className="bg-neutral-700 rounded-md outline-1 outline outline-neutral-300 w-28 text-center text-6xl font-bold text-color-secondary"
         ></input>
         <span className="text-2xl rounded-full bg-color-primary-strong pt-1 pb-1 pl-5 pr-5">
