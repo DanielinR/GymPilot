@@ -34,7 +34,7 @@ export default function LoginPage() {
   }, [router]);
 
   return (
-    <div className="flex h-screen w-screen bg-[url('/loginBackground.png')] bg-cover bg-center overflow-hidden items-center justify-center shadow-2xl">
+    <div className="flex fullheight w-screen bg-[url('/loginBackground.png')] bg-cover bg-center overflow-hidden items-center justify-center shadow-2xl">
       <div className='fixed left-1/2 top-0 -translate-x-1/2 md:left-0 md:translate-x-0'>
         <LogoWithLetters></LogoWithLetters>
       </div>

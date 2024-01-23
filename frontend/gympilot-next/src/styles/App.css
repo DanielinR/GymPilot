@@ -31,6 +31,10 @@ input[type=number]::-webkit-inner-spin-button {
     @apply bg-neutral-500 bg-opacity-25 rounded-lg p-3
 }
 
+.fullheight {
+    height: calc(var(--vh, 1vh) * 100);
+}
+
 .shadowText {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

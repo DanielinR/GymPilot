@@ -7,7 +7,7 @@ export default function CreateSetsModal() {
   const { setViewModal, viewModal, setActualWeight, actualWeight } = useContext(TrainingContext)!
 
   return (
-    <div className={`bg-black bg-opacity-60 h-screen w-screen flex items-center justify-center ${viewModal? "" : "hidden"}`}>
+    <div className={`bg-black bg-opacity-60 fullheight w-screen flex items-center justify-center ${viewModal? "" : "hidden"}`}>
       <div className="bg-color-primary w-[75%] outline-color-secondary outline rounded-md flex flex-col items-center justify-center p-6 gap-4">
         <h2 className="shadowText text-color-font text-3xl text-center font-bold">
           How much weight are you lifting?

@@ -12,9 +12,9 @@ export default function RootLayout({
 }) {
   return (
     <CheckLogin>
-      <div className="z-0 flex h-screen w-screen overflow-hidden bg-[url('/background.png')] bg-cover">
+      <div className="z-0 flex fullheight w-screen overflow-hidden bg-[url('/background.png')] bg-cover">
         <Navbar></Navbar>
-        <main className="relative bg-neutral-200 bg-opacity-50 backdrop-blur-sm h-screen w-full flex-1 overflow-hidden transition-width pt-16 md:pt-0">
+        <main className="relative bg-neutral-200 bg-opacity-50 backdrop-blur-sm fullheight w-full flex-1 overflow-hidden transition-width pt-16 md:pt-0">
           <div className='fixed left-1/2 top-1 -translate-x-1/2 md:hidden'>
             <LogoWithLetters></LogoWithLetters>
           </div>

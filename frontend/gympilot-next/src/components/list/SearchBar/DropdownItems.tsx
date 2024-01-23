@@ -39,7 +39,7 @@ export default function DropDownItems({
         onClick={() => {
           selectFunction("");
         }}
-        className={`fixed top-0 left-0 z-30 h-screen w-screen`}
+        className={`fixed top-0 left-0 z-30 fullheight w-screen`}
       ></div>
     </>
   );

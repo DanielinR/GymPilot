@@ -24,7 +24,7 @@ export default function ErrorPage() {
   }, [router]);
 
   return (
-    <div className="h-screen w-screen bg-[url('/background3.png')] bg-cover bg-top overflow-hidden shadow-2xl">
+    <div className="fullheight w-screen bg-[url('/background3.png')] bg-cover bg-top overflow-hidden shadow-2xl">
       <div className="bg-neutral-300 h-full w-full bg-opacity-40 flex items-center justify-center ">
         <div className="fixed left-1/2 top-0 -translate-x-1/2 md:left-0 md:translate-x-0">
           <LogoWithLetters></LogoWithLetters>
