@@ -123,7 +123,7 @@ export default function RoutinePage({
         >
           <PlusIcon className="h-10 w-10"></PlusIcon>
         </button>
-        <div className="flex flex-1 w-[75%] flex-col items-center h-full relative gap-5 overflow-auto pt- p-7 mb-7">
+        <div className="flex flex-1 w-[75%] flex-col items-center h-full relative gap-5 overflow-auto pt- p-6 mb-2 px-10">
           {exercises?.map((item) => {
             return (
               <div
