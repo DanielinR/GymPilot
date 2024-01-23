@@ -2,7 +2,6 @@
 
 import LoginInput from "@/components/login/LoginInput";
 import LoginButton from "@/components/login/LoginButton";
-import Image from "next/image";
 import "@/components/login/style.css"
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -11,6 +10,7 @@ import UserIcon from "@/components/svg/UserIcon";
 import KeyIcon from "@/components/svg/KeyIcon";
 import LogoWithLetters from "@/components/LogoWithLetters";
 import ErrorIcon from "@/components/svg/ErrorIcon";
+import { initScreenSize } from "@/libs/screenSize";
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -30,6 +30,7 @@ export default function LoginPage() {
       }
     };
 
+    initScreenSize();
     verifyAuth();
   }, [router]);
 

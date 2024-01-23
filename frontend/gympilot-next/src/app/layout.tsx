@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import '@/styles/globals.css'
 import '@/styles/App.css'
-import Script from 'next/script'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -24,7 +23,6 @@ export default function RootLayout({
       <body className={'${poppins.className} antialiased'}>
         {children}
       </body>
-      <Script src='scripts/screenSize.js'/>
     </html>
   )
 }

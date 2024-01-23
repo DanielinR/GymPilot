@@ -2,6 +2,7 @@
 
 import LogoWithLetters from "@/components/LogoWithLetters";
 import { checkAuth } from "@/libs/data";
+import { initScreenSize } from "@/libs/screenSize";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -19,7 +20,7 @@ export default function ErrorPage() {
       } catch (error) {
       }
     };
-
+    initScreenSize();
     verifyAuth();
   }, [router]);
 

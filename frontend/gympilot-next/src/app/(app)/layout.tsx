@@ -4,12 +4,18 @@
 import LogoWithLetters from "@/components/LogoWithLetters";
 import CheckLogin from "@/components/login/CheckLogin";
 import Navbar from "@/components/navbar/Navbar";
+import { initScreenSize } from "@/libs/screenSize";
+import { useEffect } from "react";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  useEffect(()=>{
+    initScreenSize();
+  },[])
+  
   return (
     <CheckLogin>
       <div className="z-0 flex fullheight w-screen overflow-hidden bg-[url('/background.png')] bg-cover">
