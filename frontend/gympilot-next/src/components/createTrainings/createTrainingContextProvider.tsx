@@ -57,6 +57,7 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
     }
     async function updateWeight() {
       if (!actualExercise || phase != phases.Sets) {
+        setViewModal(false);
         return;
       }
       const newWeight = await getWeightFromExercise(actualExercise?.id);
