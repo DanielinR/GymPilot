@@ -19,7 +19,7 @@ export default function NavbarButton({
     >
       <button
         onClick={handleClick}
-        className="bg-neutral-700 rounded-full p-1 flex justify-center items-center hover:bg-color-primary"
+        className={`bg-neutral-700 rounded-full p-1 flex justify-center items-center hover:bg-color-primary ${isMediumScreenOrLarger(width) ? "" : "mt-[2px] ml-2"}`}
       >
         {isMediumScreenOrLarger(width) ? (
           <GreaterThanIcon
