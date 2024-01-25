@@ -93,3 +93,7 @@ export function getIconsList(): string[] {
 export function formatWithZeros(number:number, digits:number) {
   return number.toString().padStart(digits,'0')
 }
+
+export const getRandomColor = () => {
+  return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+};
