@@ -2,11 +2,13 @@ import { useState } from "react";
 import DropDownItems from "../list/SearchBar/DropdownItems";
 import DisplayIcon from "../svg/DisplayIcon";
 
-export default function SelectType({
-  type,
+export default function DropDownList({
+  listName,
+  selectedItem,
   select,
 }: {
-  type?: string;
+  listName: string;
+  selectedItem?: string;
   select: (item: any) => void;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +17,7 @@ export default function SelectType({
     <div className="relative">
       {isOpen && (
         <DropDownItems
-          filter="type"
+          filter={listName}
           selectFunction={(selection: any) => {
             setIsOpen(false);
             if (!selection) return;
@@ -29,7 +31,7 @@ export default function SelectType({
         }}
         className="flex items-center bg-neutral-600 rounded-lg pl-2"
       >
-        <span className="font-light pr-1">{type}</span>
+        <span className="font-light pr-1">{selectedItem}</span>
         <div
           className={`flex-grow pl-1 pr-2 py-1 hover:bg-neutral-700 rounded-r-lg h-full`}
         >

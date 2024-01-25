@@ -2,8 +2,7 @@ import MuscleIcon from "@/components/svg/MuscleIcon";
 import StatsIcon from "@/components/svg/StatsIcon";
 import DumbellIcon from "@/components/svg/DumbellIcon";
 import { Exercise } from "@/libs/utils";
-import SelectExercise from "./SelectType";
-import SelectType from "./SelectType";
+import DropDownList from "./DropDownList";
 
 export default function ExerciseInfo({
   exerciseInfo,
@@ -21,7 +20,7 @@ export default function ExerciseInfo({
             <MuscleIcon className="h-7 w-7"></MuscleIcon>
             <span className="font-semibold">Type:</span>
           </div>
-          <SelectType type={exerciseInfo?.type} select={setType}></SelectType>
+          <DropDownList listName="type" selectedItem={exerciseInfo?.type} select={setType}></DropDownList>
         </div>
         <div className="flex flex-col md:flex-row gap-1 md:gap-3 items-center">
           <div className="flex gap-2 items-center">
