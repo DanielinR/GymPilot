@@ -19,10 +19,10 @@ export default function PieChart({
   width: number;
   height: number;
 }) {
-  const [activeSection, setActiveSection] = useState<any | null>(null);
-  const getRoutineColor = (routine: string) => {
-    const index = data.findIndex((item) => item.label === routine);
-    return activeSection && activeSection.routine === routine
+  const [activeSection, setActiveSection] = useState<ChartData | null>(null);
+  const getColor = (label: string) => {
+    const index = data.findIndex((item) => item.label === label);
+    return activeSection && activeSection.label === label
       ? colors_400[index]
       : colors_500[index];
   };
@@ -43,7 +43,7 @@ export default function PieChart({
             outerRadius={({ data }) => {
               const size =
                 half -
-                (activeSection && activeSection.routine == data.label
+                (activeSection && activeSection.label == data.label
                   ? 0
                   : arcActiveIncrement);
               return size;
@@ -52,7 +52,7 @@ export default function PieChart({
               const size =
                 half -
                 arcWith -
-                (activeSection && activeSection.routine == data.label
+                (activeSection && activeSection.label == data.label
                   ? arcActiveIncrement
                   : 0);
               return size;
@@ -72,7 +72,7 @@ export default function PieChart({
                       : data.data
                   )
                 }
-                getColor={(arc) => getRoutineColor(arc.data.label)}
+                getColor={(arc) => getColor(arc.data.label)}
               />
             )}
           </Pie>
@@ -81,12 +81,12 @@ export default function PieChart({
       <div className="flex flex-col shadowText text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[50% - 0px]">
         <span className="text-3xl">
           {activeSection
-            ? ((activeSection.trainings / totalValue) * 100).toFixed(1) + "%"
+            ? ((activeSection.value / totalValue) * 100).toFixed(1) + "%"
             : totalValue}
         </span>
         <span className="text-3xl">{activeSection ? "" : "workouts"}</span>
         <span className="text-xl">
-          {activeSection ? activeSection.trainings + " workouts" : ""}
+          {activeSection ? activeSection.value + " workouts" : ""}
         </span>
       </div>
     </>
