@@ -2,7 +2,7 @@ import MuscleIcon from "@/components/svg/MuscleIcon";
 import StatsIcon from "@/components/svg/StatsIcon";
 import DumbellIcon from "@/components/svg/DumbellIcon";
 import { Exercise } from "@/libs/utils";
-import DropDownList from "./DropDownList";
+import DropDownList from "../general/DropDownList";
 
 export default function ExerciseInfo({
   exerciseInfo,
