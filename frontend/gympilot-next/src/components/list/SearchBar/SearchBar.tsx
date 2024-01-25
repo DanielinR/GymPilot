@@ -32,7 +32,7 @@ export default function SearchBar({
   }, WAIT_BETWEEN_SEARCHES);
 
   return (
-    <div className="w-full flex flex-col gap-1 p-2">
+    <div className="w-full flex flex-col gap-1 p-0">
       <div
         className={`flex items-center bg-neutral-500 w-full rounded-md h-10  outline ${
           isFocused ? "outline-2" : "outline-0"
@@ -42,7 +42,7 @@ export default function SearchBar({
           onChange={(event) => {
             handleSearch(event.target.value);
           }}
-          className="flex-1 bg-transparent text-white text-lg focus:outline-none ml-4"
+          className="flex-1 bg-transparent text-white text-lg focus:outline-none ml-4 w-full"
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
           placeholder={placeholder ? placeholder : ""}

@@ -10,7 +10,7 @@ export default function ExerciseTypeBySets() {
   ];
 
   return (
-    <div className="relative flex flex-col gap-1 items-center bg-neutral-500 bg-opacity-90 pt-7 p-3 rounded-lg">
+    <div className="relative flex flex-col gap-1 items-center bg-neutral-500 bg-opacity-80 pt-7 p-3 rounded-lg">
       <h2 className="text-3xl text-center shadowText px-3">
         Exercise types by number of sets
       </h2>
