@@ -1,7 +1,8 @@
+from django.db.models.functions import TruncDate
 from rest_framework import viewsets, views, permissions, status
 from rest_framework.response import Response
 from django.db import transaction
-from django.db.models import Q
+from django.db.models import Q, Avg, ExpressionWrapper, F, fields
 from . import serializers
 from . import models
 
@@ -110,6 +111,19 @@ class CountExerciseTypeSets(views.APIView):
         for exerciseType in models.ExerciseType.objects.all():
             data.append({"label": exerciseType.name, "value": models.Set.objects.filter(exercise__type=exerciseType).count()})
         return Response(data)
+
+
+class WeightLiftedTimes(views.APIView):
+
+    def get(self, request, exercise_id):
+        exerciseSets = models.Set.objects.filter(exercise__id=exercise_id)
+        grouped = exerciseSets.annotate(training_date=TruncDate('training__date')).values("training__date").annotate(totalWeight=Avg( ExpressionWrapper(F('reps') * F('weight'), output_field=fields.DecimalField())))
+        result = [
+            {'date': item['training__date'].strftime("%Y/%m/%d"),
+             'value': float(item['totalWeight'])}
+            for item in grouped
+        ]
+        return Response(result)
 
 
 class CreateTraining(views.APIView):

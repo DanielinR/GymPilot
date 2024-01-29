@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from "react";
 import { AreaClosed, Line, Bar } from "@visx/shape";
-import { curveMonotoneX } from "@visx/curve";
+import { Curve } from "@visx/visx";
 import { GridRows, GridColumns } from "@visx/grid";
 import { scaleTime, scaleLinear } from "@visx/scale";
 import {
@@ -29,11 +29,11 @@ const tooltipStyles = {
 };
 
 // util
-const formatDate = timeFormat("%b %d, '%y");
+const formatDate = timeFormat("%b-%e %Y");
 
 // accessors
 const getDate = (d: TooltipData) => new Date(d.date);
-const getStockValue = (d: TooltipData) => d.value;
+const getStockValue = (d: TooltipData) => (d && d.value);
 const bisectDate = bisector<TooltipData, Date>((d) => new Date(d.date)).left;
 
 export type AreaProps = {
@@ -56,6 +56,7 @@ export default withTooltip<AreaProps, TooltipData>(
     tooltipLeft = 0,
   }: AreaProps & WithTooltipProvidedProps<TooltipData>) => {
     if (width < 10) return null;
+    if (!data) return <></>
 
     // bounds
     const innerWidth = width - margin.left - margin.right;
@@ -157,7 +158,7 @@ export default withTooltip<AreaProps, TooltipData>(
             strokeWidth={1}
             stroke="url(#area-gradient)"
             fill="url(#area-gradient)"
-            curve={curveMonotoneX}
+            curve={Curve.curveMonotoneX}
           />
           <Bar
             x={margin.left}
@@ -212,7 +213,7 @@ export default withTooltip<AreaProps, TooltipData>(
               left={tooltipLeft + 12}
               style={tooltipStyles}
             >
-              {`$${getStockValue(tooltipData)}`}
+              {`${getStockValue(tooltipData)}kg`}
             </TooltipWithBounds>
             <Tooltip
               top={innerHeight + margin.top - 14}

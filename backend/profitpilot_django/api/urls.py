@@ -18,6 +18,7 @@ urlpatterns = [
     path('countExerciseTemplates/', views.CountExerciseTemplates.as_view(), name='countExerciseTemplates'),
     path('countExerciseSets/', views.CountExerciseSets.as_view(), name='countExerciseSets'),
     path('countExerciseTypeSets/', views.CountExerciseTypeSets.as_view(), name='countExerciseTypeSets'),
+    path('weightLiftedTimes/<int:exercise_id>/', views.WeightLiftedTimes.as_view(), name='weightLiftedTimes'),
     path('createTraining/', views.CreateTraining.as_view(), name='createTraining'),
     path('checkAuth/', views.CheckAuth.as_view(), name='checkAuth'),
 ]
