@@ -1,7 +1,8 @@
+from django.db.models.functions import TruncDate
 from rest_framework import viewsets, views, permissions, status
 from rest_framework.response import Response
 from django.db import transaction
-from django.db.models import Q
+from django.db.models import Q, Avg, ExpressionWrapper, F, fields
 from . import serializers
 from . import models
 
@@ -81,6 +82,48 @@ class LastWeightFromExercise(views.APIView):
         exercise = models.Exercise.objects.get(id=exercise_id)
         weight = exercise.get_last_set_weight(request.user)
         return Response({"weight": weight})
+
+
+class CountExerciseTemplates(views.APIView):
+
+    def get(self, request):
+        data = []
+        for template in models.TrainingTemplate.objects.all():
+            data.append({"label": template.name, "value": models.Training.objects.filter(trainingTemplate=template).count()})
+        return Response(data)
+
+
+class CountExerciseSets(views.APIView):
+
+    def get(self, request):
+        data = []
+        for exercise in models.Exercise.objects.all():
+            count = models.Set.objects.filter(exercise=exercise).count()
+            if count != 0:
+                data.append({"label": exercise.name, "value": count})
+        return Response(data)
+
+
+class CountExerciseTypeSets(views.APIView):
+
+    def get(self, request):
+        data = []
+        for exerciseType in models.ExerciseType.objects.all():
+            data.append({"label": exerciseType.name, "value": models.Set.objects.filter(exercise__type=exerciseType).count()})
+        return Response(data)
+
+
+class WeightLiftedTimes(views.APIView):
+
+    def get(self, request, exercise_id):
+        exerciseSets = models.Set.objects.filter(exercise__id=exercise_id)
+        grouped = exerciseSets.annotate(training_date=TruncDate('training__date')).values("training__date").annotate(totalWeight=Avg( ExpressionWrapper(F('reps') * F('weight'), output_field=fields.DecimalField())))
+        result = [
+            {'date': item['training__date'].strftime("%Y/%m/%d"),
+             'value': float(item['totalWeight'])}
+            for item in grouped
+        ]
+        return Response(result)
 
 
 class CreateTraining(views.APIView):

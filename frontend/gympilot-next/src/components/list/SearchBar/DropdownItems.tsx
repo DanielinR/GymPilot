@@ -4,9 +4,11 @@ import { getFilterItems } from "./filterDropdownItems";
 export default function DropDownItems({
   filter,
   selectFunction,
+  defaultValue = "",
 }: {
   filter: string;
   selectFunction: (item: any) => void;
+  defaultValue?: string;
 }) {
   const [items, setItems] = useState([]);
 
@@ -37,7 +39,7 @@ export default function DropDownItems({
       </ul>
       <div
         onClick={() => {
-          selectFunction("");
+          selectFunction(defaultValue);
         }}
         className={`fixed top-0 left-0 z-30 fullheight w-screen`}
       ></div>
