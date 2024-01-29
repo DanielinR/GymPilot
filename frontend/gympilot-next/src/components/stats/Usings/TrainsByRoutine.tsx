@@ -1,11 +1,18 @@
+import { useEffect, useState } from "react";
 import PieChart from "../Charts/PieChart";
+import { getJsonFromAPI } from "@/libs/data";
 
 export default function ExerciseBySets() {
-  const data = [
-    { label: "push", value: 30 },
-    { label: "pull", value: 45 },
-    { label: "leg", value: 10 },
-  ];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const updateData = async () => {
+      const response = await getJsonFromAPI("/countExerciseTemplates")
+      setData(response)
+    };
+
+    updateData();
+  }, []);
 
   return (
     <div className="relative flex flex-col gap-5 items-center bg-neutral-500 bg-opacity-80 p-7 rounded-lg">

@@ -83,6 +83,17 @@ class LastWeightFromExercise(views.APIView):
         return Response({"weight": weight})
 
 
+class CountExerciseTemplates(views.APIView):
+    permission_classes = ""
+
+    def get(self, request):
+        data = []
+        for template in models.TrainingTemplate.objects.all():
+            data.append({"label":template.name, "value":models.Training.objects.filter(trainingTemplate=template).count()})
+            print(data)
+        return Response(data)
+
+
 class CreateTraining(views.APIView):
 
     def create_sets_from_exercise(self, sets_json, exercise_id, training):
