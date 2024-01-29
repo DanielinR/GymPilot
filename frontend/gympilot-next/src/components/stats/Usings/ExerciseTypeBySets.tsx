@@ -1,13 +1,18 @@
+import { useEffect, useState } from "react";
 import RadarChart from "../Charts/Radarchart";
+import { getJsonFromAPI } from "@/libs/data";
 
 export default function ExerciseTypeBySets() {
-  const data = [
-    { label: "pecho", value: 30 },
-    { label: "espalda", value: 10 },
-    { label: "pierna", value: 2 },
-    { label: "hombro", value: 30 },
-    { label: "hombro", value: 30 },
-  ];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const updateData = async () => {
+      const response = await getJsonFromAPI("/countExerciseTypeSets")
+      setData(response)
+    };
+
+    updateData();
+  }, []);
 
   return (
     <div className="relative flex flex-col gap-1 items-center bg-neutral-500 bg-opacity-80 pt-7 p-3 rounded-lg">

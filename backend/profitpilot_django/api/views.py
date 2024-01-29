@@ -103,6 +103,15 @@ class CountExerciseSets(views.APIView):
         return Response(data)
 
 
+class CountExerciseTypeSets(views.APIView):
+
+    def get(self, request):
+        data = []
+        for exerciseType in models.ExerciseType.objects.all():
+            data.append({"label": exerciseType.name, "value": models.Set.objects.filter(exercise__type=exerciseType).count()})
+        return Response(data)
+
+
 class CreateTraining(views.APIView):
 
     def create_sets_from_exercise(self, sets_json, exercise_id, training):

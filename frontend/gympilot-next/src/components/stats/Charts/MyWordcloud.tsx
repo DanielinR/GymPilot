@@ -35,7 +35,6 @@ export default function MyWordcloud({
 }: WordCloudProps) {;
   const [spiralType, setSpiralType] = useState<SpiralType>("archimedean");
   const [withRotation, setWithRotation] = useState(false);
-  console.log(data)
   const fontScale = scaleLog({
     domain: [
       Math.min(...data.map((w) => w.value)),

@@ -131,7 +131,7 @@ export default function RadarChart({
                 x={loaded ? points[i].x - 25 + directionVector.x/9: 0}
                 y={loaded ? points[i].y + 4 + directionVector.y/4.8 : 0}
               >
-                {data[i].label}
+                {data[(i-1) < 0 ? (data.length -1) : (i-1)].label}
               </Text>
             </Group>}
         )}
