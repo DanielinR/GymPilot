@@ -4,32 +4,18 @@ import { scaleLog } from "@visx/scale";
 import Wordcloud from "@visx/wordcloud/lib/Wordcloud";
 
 interface WordCloudProps {
-  wordsText: string;
+  data: DataType[];
   width: number;
   height: number;
   showControls?: boolean;
 }
 
-export interface WordData {
+export interface DataType {
   text: string;
   value: number;
 }
 
 const colors = ["#D13838", "#3899D1", "#45D138", "#CED138"];
-
-function wordFreq(text: string): WordData[] {
-  const words: string[] = text.replace(/\./g, "").split(/\s/);
-  const freqMap: Record<string, number> = {};
-
-  for (const w of words) {
-    if (!freqMap[w]) freqMap[w] = 0;
-    freqMap[w] += 1;
-  }
-  return Object.keys(freqMap).map((word) => ({
-    text: word,
-    value: freqMap[word],
-  }));
-}
 
 function getRotationDegree() {
   const rand = Math.random();
@@ -42,28 +28,27 @@ const fixedValueGenerator = () => 0.5;
 type SpiralType = "archimedean" | "rectangular";
 
 export default function MyWordcloud({
-  wordsText,
+  data,
   width,
   height,
   showControls,
-}: WordCloudProps) {
-  const words = wordFreq(wordsText);
+}: WordCloudProps) {;
   const [spiralType, setSpiralType] = useState<SpiralType>("archimedean");
   const [withRotation, setWithRotation] = useState(false);
-
+  console.log(data)
   const fontScale = scaleLog({
     domain: [
-      Math.min(...words.map((w) => w.value)),
-      Math.max(...words.map((w) => w.value)),
+      Math.min(...data.map((w) => w.value)),
+      Math.max(...data.map((w) => w.value)),
     ],
-    range: [10, 100],
+    range: [10, 36],
   });
-  const fontSizeSetter = (datum: WordData) => fontScale(datum.value);
+  const fontSizeSetter = (datum: DataType) => fontScale(datum.value);
 
   return (
     <div className="wordcloud">
       <Wordcloud
-        words={words}
+        words={data}
         width={width}
         height={height}
         fontSize={fontSizeSetter}
