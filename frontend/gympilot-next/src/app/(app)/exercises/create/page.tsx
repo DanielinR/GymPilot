@@ -4,11 +4,11 @@ import { Exercise } from "@/libs/utils";
 import ExerciseImage from "@/components/ExerciseDetails/ExericiseImage";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import SelectType from "@/components/ExerciseDetails/SelectType";
 import MuscleIcon from "@/components/svg/MuscleIcon";
 import SelectIcon from "@/components/ExerciseDetails/SelectIcon";
 import NameModal from "@/components/ExerciseDetails/Create/NameModal";
 import { createFromAPI, getIdByName } from "@/libs/data";
+import DropDownList from "@/components/general/DropDownList";
 
 export default function CrateExercisePage() {
   const router = useRouter();
@@ -80,10 +80,11 @@ export default function CrateExercisePage() {
             <span className="font-semibold">Type:</span>
           </div>
           <div className={typeAdviseView ? "border-error-500 border rounded-lg" : ""}>
-            <SelectType
-              type={exerciseInfo?.type || "Select one"}
+            <DropDownList
+              selectedItem={exerciseInfo?.type || "Select one"}
+              listName="type"
               select={setType}
-            ></SelectType>
+            ></DropDownList>
           </div>
           {typeAdviseView && <span className="text-base text-error-500">
             type needed to create an exercise
