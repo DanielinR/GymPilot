@@ -32,7 +32,7 @@ export default function SearchBar({
   }, WAIT_BETWEEN_SEARCHES);
 
   return (
-    <div className="w-full flex flex-col gap-1 p-0">
+    <div className="w-full flex flex-col gap-1 p-0 m-1 px-2">
       <div
         className={`flex items-center bg-neutral-500 w-full rounded-md h-10  outline ${
           isFocused ? "outline-2" : "outline-0"

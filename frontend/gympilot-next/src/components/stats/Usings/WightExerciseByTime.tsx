@@ -5,15 +5,19 @@ import { getJsonFromAPI } from "@/libs/data";
 export default function WeightExerciseByTime({
   exercise_id,
 }: {
-  exercise_id: number;
+  exercise_id: string;
 }) {
   const [width, setWidth] = useState(0);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const updateData = async () => {
-      const response = await getJsonFromAPI("/weightLiftedTimes/" + exercise_id);
-      setData(response);
+      if (exercise_id){
+        const response = await getJsonFromAPI("/weightLiftedTimes/" + exercise_id);
+        setData(response);
+      }else{
+        setData([]);
+      }
     };
     const actualizarAnchura = () => {
       const objeto = document.getElementById("canvasAreaChart");
