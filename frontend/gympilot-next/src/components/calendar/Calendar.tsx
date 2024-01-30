@@ -33,7 +33,7 @@ function Calendar({setSelectedDate = ()=>{}}:{setSelectedDate?:Function}) {
   }
 
   return (
-    <div className="text-white flex flex-col justify-center items-center flex-[4] p-3 w-full sm:w-5/6 sm:pb-10 pt-0">
+    <div className="text-white flex flex-col justify-center items-center flex-[4] p-5 w-full bg-neutral-500 bg-opacity-90 rounded-lg ">
       <div className='flex items-center justify-evenly w-full'>
         <button onClick={() => {handleMonthsClick(-1)}}>
         <ArrowIcon className='h-9 w-9 md:h-12 md:w-12 p-1 bg-brand-500 hover:bg-brand-700 shadow-md rounded-full rotate-180'></ArrowIcon>
