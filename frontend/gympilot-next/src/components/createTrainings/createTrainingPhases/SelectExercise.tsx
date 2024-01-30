@@ -15,22 +15,16 @@ export default function SelectExercise() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col gap-5 items-center justify-between p-5">
+    <div className="h-full w-full flex flex-col gap-5 items-center justify-between p-5 pt-0 relative">
+      {<BackButton phaseToSet={exercises && exercises.length !== 0 ? phases.WatchActualTraining : phases.TrainingTemplates} classname="absolute left-8 top-6"/>}
       <List<Exercise>
-        tittle={"What exercise do you want to do now?"}
-        tittleSize="text-4xl"
+        tittle={"Next exercise"}
         searchBy="name"
         url={"/exercises"}
         render={ExerciseElement}
         functionButtons={handleSelection}
         filters={["template", "type"]}
       ></List>
-      {(!exercises || exercises.length == 0) && (
-        <BackButton phaseToSet={phases.TrainingTemplates} />
-      )}
-      {exercises && exercises.length !== 0 && (
-        <BackButton phaseToSet={phases.WatchActualTraining} />
-      )}
     </div>
   );
 }

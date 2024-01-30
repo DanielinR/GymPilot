@@ -1,19 +1,17 @@
 import { useContext } from "react";
 import { TrainingContext } from "../createTrainingContextProvider";
-import BackIcon from "@/components/svg/BackIcon";
+import GreaterThanIcon from "@/components/svg/GreaterThanIcon";
 
-export default function BackButton({phaseToSet}:{phaseToSet:number}) {
+export default function BackButton({ phaseToSet, classname = "" }: { phaseToSet: number, classname?: string }) {
   const { setPhase } = useContext(TrainingContext)!;
 
   return (
-    <div className="flex justify-start w-full pb-3 pr-3">
-      <button
-        onClick={() => {
-          setPhase(phaseToSet);
-        }}
-      >
-        <BackIcon className="h-16 w-16 bg-brand-500 p-3 rounded-full text-white" />
-      </button>
-    </div>
+    <button className={classname + " bg-brand-500 hover:bg-brand-700 p-3 rounded-full shadow-lg"}
+      onClick={() => {
+        setPhase(phaseToSet);
+      }}
+    >
+      <GreaterThanIcon className="h-5 w-5 text-white" />
+    </button>
   );
 }

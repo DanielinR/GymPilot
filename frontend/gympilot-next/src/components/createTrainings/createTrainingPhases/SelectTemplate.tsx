@@ -12,10 +12,9 @@ export default function SelectTemplate() {
     setPhase(phases.Exercises);
   };
   return (
-    <div className="h-full w-full flex items-center p-5">
+    <div className="h-full w-full flex items-center p-5 pt-0">
         <List<Template>
-          tittle={"What workout will you do today?"}
-          tittleSize="text-4xl"
+          tittle={"Routine"}
           searchBy="name"
           url={"/trainingTemplates"}
           render={ListElement}

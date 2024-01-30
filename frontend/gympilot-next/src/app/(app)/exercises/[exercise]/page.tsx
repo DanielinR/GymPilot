@@ -61,7 +61,7 @@ export default function ExercisePage({
   }, [params.exercise]);
 
   return (
-    <div className="flex flex-col text-white w-full h-full items-center pt-6 md:pt-24 gap-6 md:gap-14 relative">
+    <div className="flex flex-col text-white w-full h-full items-center pt-6 md:pt-12 gap-6 md:gap-6 relative">
       <SelectIcon
         viewModal={viewIconSelection}
         selectAnswer={setIcon}
@@ -74,7 +74,7 @@ export default function ExercisePage({
         <button onClick={() => {router.back()}}
           className="bg-brand-500 hover:bg-brand-700 rounded-full shadow-lg flex items-center justify-center p-3 absolute top-1/2 left-3 md:left-10 -translate-y-1/2"
         >
-          <GreaterThanIcon className="md:h-10 md:w-10 h-5 w-5 text-white"></GreaterThanIcon>
+          <GreaterThanIcon className="h-5 w-5 text-white"></GreaterThanIcon>
         </button>
         <h2 className="tittle font-bold h-full text-center relative max-w-[64%] flex justify-center">
           {exerciseInfo?.name.toUpperCase()}

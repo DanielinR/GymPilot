@@ -77,7 +77,6 @@ export default function RoutinePage({
         >
           <List<Exercise>
             tittle={"Add exercise"}
-            tittleSize="text-4xl"
             searchBy="name"
             url={"/exercises"}
             render={ExerciseElement}

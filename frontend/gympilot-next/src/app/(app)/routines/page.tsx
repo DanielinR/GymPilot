@@ -24,7 +24,6 @@ export default function RoutinesPage() {
         <NameModal setName={createTemplate} viewModal={viewCreateModal}></NameModal>
         <List<Template>
             tittle={"Routines"}
-            tittleSize="text-4xl"
             searchBy="name"
             url={"/trainingTemplates"}
             render={ListElement}
