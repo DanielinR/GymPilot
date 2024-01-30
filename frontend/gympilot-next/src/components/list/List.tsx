@@ -10,7 +10,6 @@ import PlusIcon from "../svg/PlusIcon";
 
 export default function List<T extends { id: number }>({
   tittle,
-  tittleSize = "text-5xl",
   url,
   jsonParam,
   searchBy,
@@ -20,7 +19,6 @@ export default function List<T extends { id: number }>({
   functionButtons,
 }: {
   tittle: string;
-  tittleSize?: string;
   createFunction?: Function;
   url: string;
   jsonParam?: string;
@@ -77,7 +75,7 @@ export default function List<T extends { id: number }>({
   return (
     <div className="flex flex-col items-center pt-5 h-full w-full overflow-hidden">
       <h2
-        className={`tittle text-white ${tittleSize} font-bold mb-5 text-center relative`}
+        className={`tittle text-white font-bold mb-5 text-center relative`}
       >
         {tittle}
         {createFunction && (

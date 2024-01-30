@@ -102,7 +102,7 @@ export default function RoutinePage({
         >
           <GreaterThanIcon className="md:h-10 md:w-10 h-5 w-5 text-white"></GreaterThanIcon>
         </button>
-        <h2 className="tittle text-4xl md:text-5xl lg:text-6xl font-bold h-full text-center relative max-w-[64%] flex justify-center">
+        <h2 className="tittle font-bold h-full text-center relative max-w-[64%] flex justify-center">
           {name.toUpperCase()}
           <button
             onClick={() => {
@@ -121,14 +121,14 @@ export default function RoutinePage({
           }}
           className="p-3 bg-brand-500 hover:bg-brand-700 rounded-full shadow-lg"
         >
-          <PlusIcon className="h-10 w-10"></PlusIcon>
+          <PlusIcon className="h-9 w-9"></PlusIcon>
         </button>
         <div className="flex flex-1 w-[75%] flex-col items-center h-full relative gap-5 overflow-auto pt- p-6 mb-2 px-10">
           {exercises?.map((item) => {
             return (
               <div
                 key={item.id}
-                className="bg-neutral-500 bg-opacity-90 p-5 w-full rounded-lg flex items-center justify-center text-xl font-bold relative text-center"
+                className="bg-neutral-500 bg-opacity-90 p-5 w-full rounded-lg flex items-center justify-center text-lg font-normal relative text-center"
               >
                 {item.name}
                 <button

@@ -17,7 +17,7 @@ export default function WatchActualTraining() {
 
   return (
     <div className="h-full w-full flex flex-col items-center justify-between text-white pt-4">
-        <h1 className="tittle text-6xl">{template?.name.toUpperCase()}</h1>
+        <h1 className="tittle">{template?.name.toUpperCase()}</h1>
       <div className="flex flex-col items-center justify-center gap-5">
         <button className="bg-brand-500 rounded-full"
           onClick={() => {

@@ -7,7 +7,7 @@ export default function CreateSetsTittle() {
   
   return (
     <div className="flex flex-col items-center justify-center text-white">
-      <h1 className="tittle text-5xl font-bold rounded-md p-4 pt-7 text-center">
+      <h1 className="tittle font-bold rounded-md p-4 pt-7 text-center">
         {actualExercise?.name.toUpperCase()}
       </h1>
       <div className="relative -translate-y-2">

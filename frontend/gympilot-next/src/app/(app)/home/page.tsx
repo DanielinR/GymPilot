@@ -15,7 +15,7 @@ export default function HomePage() {
       <div className="lg:row-start-1 lg:row-end-4 flex items-center justify-center flex-col gap-4">
         <div className="flex items-center justify-center gap-2 tittle">
           <CalendarIcon className="h-10 w-10 text-white"></CalendarIcon>
-          <h2 className="text-white text-2xl lg:text-4xl font-extrabold text-center flex items-center justify-center">
+          <h2 className="text-white font-extrabold text-center flex items-center justify-center">
             TRAINING CALENDAR
           </h2>
         </div>

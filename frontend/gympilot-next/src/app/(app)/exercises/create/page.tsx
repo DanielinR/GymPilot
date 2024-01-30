@@ -65,7 +65,7 @@ export default function CrateExercisePage() {
       ></SelectIcon>
       <NameModal viewModal={viewNameModal} setName={setName}></NameModal>
       <div className="w-full justify-center flex relative">
-        <h2 className="tittle text-4xl md:text-5xl lg:text-6xl font-bold h-full text-center relative max-w-[64%] flex justify-center">
+        <h2 className="tittle font-bold h-full text-center relative max-w-[64%] flex justify-center">
           {exerciseInfo?.name.toUpperCase()}
         </h2>
       </div>

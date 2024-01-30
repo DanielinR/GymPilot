@@ -76,7 +76,7 @@ export default function ExercisePage({
         >
           <GreaterThanIcon className="md:h-10 md:w-10 h-5 w-5 text-white"></GreaterThanIcon>
         </button>
-        <h2 className="tittle text-4xl md:text-5xl lg:text-6xl font-bold h-full text-center relative max-w-[64%] flex justify-center">
+        <h2 className="tittle font-bold h-full text-center relative max-w-[64%] flex justify-center">
           {exerciseInfo?.name.toUpperCase()}
           <button
             onClick={() => {
