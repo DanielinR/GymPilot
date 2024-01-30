@@ -23,7 +23,7 @@ export default function LoginButton({
     setTimeout(async () => {
       try {
         const response = await login({ username, password });
-        if (response) { router.push("/") }
+        if (response) { router.push("/home") }
       } catch (error) {
         setError(true)
       }

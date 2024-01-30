@@ -16,7 +16,7 @@ export default function NavbarContent({ isOpen, selectOption }: { isOpen: Boolea
         {!isOpen && <Image alt="logo image" src={"/icon.png"} width={40} height={50} />}
       </div>
       <div className="flex flex-col gap-2">
-        <NavbarLink tittle={isOpen ? "Home" : ""} link="/" selectOption={selectOption} SvgIcon={HomeIcon}></NavbarLink>
+        <NavbarLink tittle={isOpen ? "Home" : ""} link="/home" selectOption={selectOption} SvgIcon={HomeIcon}></NavbarLink>
         <NavbarLink tittle={isOpen ? "Exercises" : ""} link="/exercises" selectOption={selectOption} SvgIcon={DumbellIcon}></NavbarLink>
         <NavbarLink tittle={isOpen ? "Routines" : ""} link="/routines" selectOption={selectOption} SvgIcon={TablesIcon}></NavbarLink>
         <NavbarLink tittle={isOpen ? "Stats" : ""} link="/stats" selectOption={selectOption} SvgIcon={StatsIcon}></NavbarLink>

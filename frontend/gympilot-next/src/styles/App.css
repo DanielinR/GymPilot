@@ -1,44 +1,54 @@
 /* Estilizando la barra de desplazamiento en sí */
 ::-webkit-scrollbar {
-    width: 12px;
+  width: 12px;
 }
 
 /* Estilizando el rastro del scrollbar (la parte donde se desplaza el thumb) */
 ::-webkit-scrollbar-track {
-    width: 20px;
-    background: white; /* Color de fondo */
-    border-radius: 8px;
+  width: 20px;
+  background: white; /* Color de fondo */
+  border-radius: 8px;
 }
 
 /* Estilizando el thumb del scrollbar (la parte que se mueve) */
 ::-webkit-scrollbar-thumb {
-    background: #38D1BD; /* Color del thumb */
-    border-radius: 8px;
+  background: #38d1bd; /* Color del thumb */
+  border-radius: 8px;
 }
 
 /* Cambio de color al pasar el ratón */
 ::-webkit-scrollbar-thumb:hover {
-    background: #0C9987; /* Color del thumb al pasar el ratón */
+  background: #0c9987; /* Color del thumb al pasar el ratón */
 }
 
 /* quito los botones laterales para el input */
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 
 .tittle {
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    @apply bg-neutral-500 bg-opacity-25 rounded-lg p-3
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @apply bg-neutral-500 bg-opacity-25 rounded-lg p-3;
 }
 
 .fullheight {
-    height: calc(var(--vh, 1vh) * 100);
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+.min-fullheight {
+  min-height: calc(var(--vh, 1vh) * 100);
 }
 
 .shadowText {
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .shadow-brand {
-    filter: drop-shadow(0px 4px 23.9px #00443B);
+  filter: drop-shadow(0px 4px 23.9px #00443b);
+}
+
+.inner-bottom-shadow {
+  -webkit-box-shadow: inset 0px -139px 73px 7px rgba(0, 0, 0, 0.64);
+  -moz-box-shadow: inset 0px -139px 73px 7px rgba(0, 0, 0, 0.64);
+  box-shadow: inset 0px -139px 73px 7px rgba(0, 0, 0, 0.84);
 }

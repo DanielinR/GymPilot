@@ -12,7 +12,7 @@ export default function WatchActualTraining() {
   async function finishTraining() {
     if (!template) return;
     await setTraining(exercises, template.id);
-    router.push("/");
+    router.push("/home");
   }
 
   return (

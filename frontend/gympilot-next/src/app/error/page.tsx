@@ -13,7 +13,7 @@ export default function ErrorPage() {
       try {
         const isAuth = await checkAuth();
         if (isAuth) {
-          router.push("/");
+          router.push("/home");
         }else{
           router.push("/login");
         }

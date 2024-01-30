@@ -23,7 +23,7 @@ export default function LoginPage() {
       try {
         const isAuth = await checkAuth();
         if (isAuth) {
-          router.push('/');
+          router.push('/home');
         }
       } catch (error) {
         router.push("/error")

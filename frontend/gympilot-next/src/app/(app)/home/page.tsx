@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { SimpleDate } from "@/libs/utils";
 
-export default function Home() {
+export default function HomePage() {
   const [selectedDate, setSelectedDate] = useState<SimpleDate>();
   return (
     <div className="grid grid-rows-[7fr_2fr_3fr] lg:grid-rows-4 lg:grid-cols-[3fr_1fr_1fr] h-full w-full gap-8 p-8">
