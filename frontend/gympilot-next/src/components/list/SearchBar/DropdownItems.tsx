@@ -23,14 +23,14 @@ export default function DropDownItems({
   return (
     <>
       <ul
-        className={`absolute top-7 left-1/2 -translate-x-1/2 z-40 rounded-b-lg flex flex-col items-center text-white bg-neutral-500 bg-opacity-95 h-48 overflow-y-auto overflow-x-hidden`}
+        className={`absolute top-7 left-1/2 -translate-x-1/2 z-40 rounded-b-lg flex flex-col items-center text-white bg-neutral-500 bg-opacity-95 max-h-48 overflow-y-auto overflow-x-hidden`}
       >
         {items.map((item:any) => {
           return (
             <button
               onClick={() => selectFunction(item)}
               key={item.name}
-              className="hover:bg-neutral-700 p-2"
+              className="hover:bg-neutral-700 p-2 w-full"
             >
               {item.name}
             </button>
