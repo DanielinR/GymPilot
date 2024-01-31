@@ -17,7 +17,7 @@ export default function ExercisesPage() {
   }
 
   return (
-    <div className="p-5 w-full h-full">
+    <div className="p-5 pt-0 md:pt-5 w-full h-full">
       <List<Exercise> tittle="Exercises" url="/exercises" createFunction={createExercise} searchBy="name" render={ExerciseElement} functionButtons={handleSelection} filters={["routine", "type"]}></List>
     </div>
   );
