@@ -36,7 +36,7 @@ export default function List<T extends { id: number }>({
     async function updateJsonResponse() {
       var finalUrl = url;
       var finalJsonParam = jsonParam;
-      const templateFilter = searchParams.get("template")?.toString();
+      const templateFilter = searchParams.get("routine")?.toString();
       finalUrl = templateFilter
         ? `/trainingTemplates/${await getIdByName(
             "/trainingTemplates",
@@ -58,7 +58,7 @@ export default function List<T extends { id: number }>({
         value,
       }));
       filtersURL = filtersURL.filter(
-        ({ key }) => key !== "template" && key !== "search"
+        ({ key }) => key !== "routine" && key !== "search"
       );
       response = filterJsonEquals(response, filtersURL);
       if (isSubscribed) {

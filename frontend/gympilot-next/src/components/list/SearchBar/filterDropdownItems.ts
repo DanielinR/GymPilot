@@ -6,7 +6,7 @@ export async function getFilterItems(filter: string) {
       return await getJsonFromAPI("/exerciseTypes");
     }
 
-    case "template": {
+    case "routine": {
       return await getJsonFromAPI("/trainingTemplates");
     }
     default: {

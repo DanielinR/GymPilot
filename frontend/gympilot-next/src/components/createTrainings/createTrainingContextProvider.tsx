@@ -42,7 +42,7 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
   const setPhase = (phase:phases) => {
     if (template){
       const params = new URLSearchParams(searchParams);
-      params.set("template", template.name);
+      params.set("routine", template.name);
       router.replace(`${pathname}?${params.toString()}`);
     }
     setPhasePrivate(phase)
@@ -51,7 +51,7 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
     function deleteTemplateFilter() {
       const params = new URLSearchParams(searchParams);
       if (!template || phase != phases.Exercises) {
-        params.delete("template");
+        params.delete("routine");
         router.replace(`${pathname}?${params.toString()}`);
       }
     }

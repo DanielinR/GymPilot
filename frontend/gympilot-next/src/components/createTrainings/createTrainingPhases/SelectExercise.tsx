@@ -23,7 +23,7 @@ export default function SelectExercise() {
         url={"/exercises"}
         render={ExerciseElement}
         functionButtons={handleSelection}
-        filters={["template", "type"]}
+        filters={["routine", "type"]}
       ></List>
     </div>
   );

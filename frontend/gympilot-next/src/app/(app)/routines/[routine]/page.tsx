@@ -81,7 +81,7 @@ export default function RoutinePage({
             url={"/exercises"}
             render={ExerciseElement}
             functionButtons={addExercise}
-            filters={["template", "type"]}
+            filters={["routine", "type"]}
           ></List>
           <button
             onClick={() => {
