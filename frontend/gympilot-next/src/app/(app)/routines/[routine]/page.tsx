@@ -99,7 +99,7 @@ export default function RoutinePage({
           }}
           className="bg-brand-500 hover:bg-brand-700 rounded-full shadow-lg flex items-center justify-center p-3 absolute top-1/2 left-3 md:left-10 -translate-y-1/2"
         >
-          <GreaterThanIcon className="md:h-10 md:w-10 h-5 w-5 text-white"></GreaterThanIcon>
+          <GreaterThanIcon className="h-5 w-5 text-white"></GreaterThanIcon>
         </button>
         <h2 className="tittle font-bold h-full text-center relative max-w-[64%] flex justify-center">
           {name.toUpperCase()}
