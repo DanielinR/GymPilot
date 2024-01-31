@@ -60,12 +60,6 @@ export type Template = {
   name: string;
 };
 
-export type SimpleDate = {
-  day: number;
-  month: number;
-  year: number;
-};
-
 export const monthNames = [
   "January",
   "February",
