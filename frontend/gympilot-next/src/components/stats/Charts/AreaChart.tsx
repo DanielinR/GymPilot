@@ -213,7 +213,7 @@ export default withTooltip<AreaProps, TooltipData>(
               left={tooltipLeft + 12}
               style={tooltipStyles}
             >
-              {`${getStockValue(tooltipData)}kg`}
+              {`${getStockValue(tooltipData).toFixed(2)}kg`}
             </TooltipWithBounds>
             <Tooltip
               top={innerHeight + margin.top - 14}

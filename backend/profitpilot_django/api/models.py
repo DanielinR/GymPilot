@@ -30,7 +30,7 @@ class Exercise(models.Model):
     def get_last_set_weight(self, user):
         last_set_weight = Set.objects.filter(
             Q(exercise__user=user) | Q(exercise__user__isnull=True),
-            exercise_id=self.id,
+            exercise_id=self.id, training__user=user
         ).select_related('training').order_by('-training__date', '-id').values().first()
         return last_set_weight['weight'] if last_set_weight else None
 

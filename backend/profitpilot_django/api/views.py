@@ -88,8 +88,8 @@ class CountExerciseTemplates(views.APIView):
 
     def get(self, request):
         data = []
-        for template in models.TrainingTemplate.objects.all():
-            data.append({"label": template.name, "value": models.Training.objects.filter(trainingTemplate=template).count()})
+        for template in models.TrainingTemplate.objects.filter(user=request.user) | models.TrainingTemplate.objects.filter(user=None):
+            data.append({"label": template.name, "value": models.Training.objects.filter(trainingTemplate=template, user=request.user).count()})
         return Response(data)
 
 
@@ -97,8 +97,8 @@ class CountExerciseSets(views.APIView):
 
     def get(self, request):
         data = []
-        for exercise in models.Exercise.objects.all():
-            count = models.Set.objects.filter(exercise=exercise).count()
+        for exercise in models.Exercise.objects.filter(user=request.user) | models.Exercise.objects.filter(user=None):
+            count = models.Set.objects.filter(exercise=exercise, training__user=request.user).count()
             if count != 0:
                 data.append({"label": exercise.name, "value": count})
         return Response(data)
@@ -108,16 +108,16 @@ class CountExerciseTypeSets(views.APIView):
 
     def get(self, request):
         data = []
-        for exerciseType in models.ExerciseType.objects.all():
-            data.append({"label": exerciseType.name, "value": models.Set.objects.filter(exercise__type=exerciseType).count()})
+        for exerciseType in models.ExerciseType.objects.filter(user=request.user) | models.ExerciseType.objects.filter(user=None):
+            data.append({"label": exerciseType.name, "value": models.Set.objects.filter(exercise__type=exerciseType, training__user=request.user).count()})
         return Response(data)
 
 
 class WeightLiftedTimes(views.APIView):
 
     def get(self, request, exercise_id):
-        exerciseSets = models.Set.objects.filter(exercise__id=exercise_id)
-        grouped = exerciseSets.annotate(training_date=TruncDate('training__date')).values("training__date").annotate(totalWeight=Avg( ExpressionWrapper(F('reps') * F('weight'), output_field=fields.DecimalField())))
+        exercise_sets = models.Set.objects.filter(exercise__id=exercise_id, training__user=request.user)
+        grouped = exercise_sets.annotate(training_date=TruncDate('training__date')).values("training__date").annotate(totalWeight=Avg( ExpressionWrapper(F('reps') * F('weight'), output_field=fields.DecimalField())))
         result = [
             {'date': item['training__date'].strftime("%Y/%m/%d"),
              'value': float(item['totalWeight'])}
@@ -166,8 +166,10 @@ class AddExercise(views.APIView):
             data_json = request.data
             exercise = models.Exercise.objects.get(id=data_json["id"])
             template = models.TrainingTemplate.objects.get(id=template_id)
+            if template.user != request.user or (exercise.user != request.user and exercise.user is not None):
+                return Response({"error": "Unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)
             template.exercises.add(exercise)
-            template.save
+            template.save()
             return Response({"status": "success"}, status=status.HTTP_200_OK)
 
         except models.TrainingTemplate.DoesNotExist:
@@ -189,8 +191,10 @@ class DeleteExercise(views.APIView):
             data_json = request.data
             exercise = models.Exercise.objects.get(id=data_json["id"])
             template = models.TrainingTemplate.objects.get(id=template_id)
+            if template.user != request.user or (exercise.user != request.user and exercise.user is not None):
+                return Response({"error": "Unauthorized"}, status=status.HTTP_401_UNAUTHORIZED)
             template.exercises.remove(exercise)
-            template.save
+            template.save()
             return Response({"status": "success"}, status=status.HTTP_200_OK)
 
         except models.TrainingTemplate.DoesNotExist:
