@@ -97,3 +97,20 @@ export function formatWithZeros(number:number, digits:number) {
 export const getRandomColor = () => {
   return `#${Math.floor(Math.random()*16777215).toString(16)}`;
 };
+
+export const chartColors = [
+  "#EBFFFC",
+  "#C3FBF2",
+  "#8BF4E7",
+  "#56E8D5",
+  "#38D1BD",
+  "#1EB5A1",
+  "#0C9987",
+  "#036457",
+  "#00443B",
+];
+
+export function shadeHexColor(color:string, percent:number) {
+  var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
+  return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
+}

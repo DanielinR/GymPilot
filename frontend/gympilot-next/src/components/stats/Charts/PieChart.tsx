@@ -2,9 +2,10 @@ import { Group } from "@visx/group";
 import { Pie } from "@visx/shape";
 import { useState } from "react";
 import AnimatedPie from "../Charts/AnimatedPie";
+import { chartColors } from "@/libs/utils";
 
-const colors_500 = ["#D13838", "#3899D1", "#45D138", "#CED138"];
-const colors_400 = ["#E85656", "#56B2E8", "#62E856", "#E5E856"];
+const colors_500 = chartColors.slice().reverse();
+const colors_400 = chartColors.slice().reverse();
 
 type ChartData = {
   label: string;

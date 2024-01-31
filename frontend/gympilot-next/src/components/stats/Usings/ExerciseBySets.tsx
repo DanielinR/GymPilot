@@ -34,7 +34,9 @@ export default function ExerciseBySets() {
       <h2 className="text-3xl text-center shadowText">
         Most popular exercises
       </h2>
-      <MyWordcloud data={data} height={280} width={width} />
+      <div className="h-full flex items-center justify-center">
+        <MyWordcloud data={data} height={280} width={width} />
+      </div>
     </div>
   );
 }

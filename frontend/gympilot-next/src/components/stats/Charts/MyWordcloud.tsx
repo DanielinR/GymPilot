@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Text } from "@visx/text";
 import { scaleLog } from "@visx/scale";
 import Wordcloud from "@visx/wordcloud/lib/Wordcloud";
+import { chartColors } from "@/libs/utils";
 
 interface WordCloudProps {
   data: DataType[];
@@ -15,7 +16,7 @@ export interface DataType {
   value: number;
 }
 
-const colors = ["#D13838", "#3899D1", "#45D138", "#CED138"];
+const colors = chartColors;
 
 function getRotationDegree() {
   const rand = Math.random();
