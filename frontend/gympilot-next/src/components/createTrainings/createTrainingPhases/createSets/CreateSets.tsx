@@ -62,7 +62,7 @@ export default function CreateSets() {
           selectionText="reps"
           handleSelection={createSet}
         />
-        <div className="flex justify-center items-center gap-4 w-full h-full max-h-full bg-neutral-500 bg-opacity-40 p-4 rounded-md flex-wrap overflow-auto">
+        <div className="flex justify-center items-center gap-4 w-full h-full max-h-full bg-neutral-500 bg-opacity-40 py-4 rounded-md flex-wrap overflow-auto">
           {currentExerciseSets && currentExerciseSets.length > 0 ? (
             currentExerciseSets.map((item, index) => {
               return <Setbox key={index} set={item}></Setbox>;
