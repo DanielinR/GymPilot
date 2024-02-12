@@ -6,6 +6,7 @@ App for managing your trainings
 
 ## Front-end developed on Next.js
 This server call the back API hosted on "API_URL" environment variable.
+
 run the server with:
 ```
 npm install
@@ -14,6 +15,7 @@ npm run dev
 
 ## Back-end developed on Django rest framework
 A PostgreSQL database hosted on the port that the .env file indicates is needed.
+
 run the server with:
 ```
 pip install -r requirements.txt
