@@ -52,3 +52,9 @@ input[type="number"]::-webkit-inner-spin-button {
   -moz-box-shadow: inset 0px -139px 73px 7px rgba(0, 0, 0, 0.64);
   box-shadow: inset 0px -139px 73px 7px rgba(0, 0, 0, 0.84);
 }
+
+@media screen and (min-width: 1024px) {
+  .bg-position-7vh{
+    background-position-y: -5vw;
+  }
+}

@@ -15,10 +15,12 @@ export default function PieChart({
   data,
   width,
   height,
+  datatitle,
 }: {
   data: ChartData[];
   width: number;
   height: number;
+  datatitle?: string;
 }) {
   const [activeSection, setActiveSection] = useState<ChartData | null>(null);
   const getColor = (label: string) => {
@@ -36,7 +38,7 @@ export default function PieChart({
   const totalValue = data.reduce((total, actual) => total + actual.value, 0);
   return (
     <>
-      <svg width={width} height={height}>
+      <svg width={width} height={height} className="overflow-visible">
         <Group top={half} left={half}>
           <Pie
             data={data}
@@ -79,17 +81,19 @@ export default function PieChart({
           </Pie>
         </Group>
       </svg>
-      <div className="flex flex-col shadowText text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[50% - 0px]">
-        <span className="text-3xl">
-          {activeSection
-            ? ((activeSection.value / totalValue) * 100).toFixed(1) + "%"
-            : totalValue}
-        </span>
-        <span className="text-3xl">{activeSection ? "" : "workouts"}</span>
-        <span className="text-xl">
-          {activeSection ? activeSection.value + " workouts" : ""}
-        </span>
-      </div>
+      { datatitle &&
+        <div className="flex flex-col shadowText text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[50% - 0px]">
+          <span className="text-3xl">
+            {activeSection
+              ? ((activeSection.value / totalValue) * 100).toFixed(1) + "%"
+              : totalValue.toFixed(2)}
+          </span>
+          <span className="text-3xl">{activeSection ? "" : datatitle}</span>
+          <span className="text-xl">
+            {activeSection ? activeSection.value.toFixed(2) + " " + datatitle : ""}
+          </span>
+        </div>
+      }
     </>
   );
 }
