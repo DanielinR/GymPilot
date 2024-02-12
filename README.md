@@ -4,6 +4,8 @@ App for managing your trainings. [Test it now!](https://gympilot.danielin.xyz)
 ![mobileScreenshot](https://github.com/DanielinR/GymPilot/assets/60990208/61f46aca-eace-4108-81d4-a79487beb66c)
 
 
+There is a compose.yml ready for dockerizing the app.
+
 ## Front-end developed on Next.js
 This server call the back API hosted on "API_URL" environment variable.
 
