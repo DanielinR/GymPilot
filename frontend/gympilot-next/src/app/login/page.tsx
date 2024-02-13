@@ -11,6 +11,7 @@ import KeyIcon from "@/components/svg/KeyIcon";
 import LogoWithLetters from "@/components/LogoWithLetters";
 import ErrorIcon from "@/components/svg/ErrorIcon";
 import { initScreenSize } from "@/libs/screenSize";
+import GoogleLoginButton from "@/components/login/GoogleLoginButton";
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -44,7 +45,9 @@ export default function LoginPage() {
           <span className="font-bold text-5xl text-white pb-6">Sign in</span>
           <LoginInput setValue={setUsername} tittle="Username" type="text" SvgIcon={UserIcon} />
           <LoginInput setValue={setPassword} tittle="Password" type="password" SvgIcon={KeyIcon} />
-          {errorMessage && <div className=" bg-error-300 px-2 py-1 rounded-lg flex gap-2 items-center">
+          <GoogleLoginButton/>
+          {errorMessage && 
+          <div className=" bg-error-300 px-2 py-1 rounded-lg flex gap-2 items-center">
             <ErrorIcon className="h-7 w-7 text-error-700"></ErrorIcon>
             <span className="text-error-700 font-bold text-xl">Invalid credentials</span>
           </div>}

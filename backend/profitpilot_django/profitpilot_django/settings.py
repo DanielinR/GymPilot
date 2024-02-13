@@ -35,7 +35,37 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '192.168.1.61','api.daniel
 
 # Application definition
 
+SITE_ID=1
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
+
+AUTHENTICATION_BACKENDS=(
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+
+# LOGIN_REDIRECT_URL = "/home"
+
+# SOCIALACCOUNT_LOGIN_ON_GET=True
+
 INSTALLED_APPS = [
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'dj_rest_auth.registration',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'corsheaders',
@@ -59,6 +89,7 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',

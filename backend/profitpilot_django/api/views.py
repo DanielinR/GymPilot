@@ -5,7 +5,15 @@ from django.db import transaction
 from django.db.models import Q, Avg, ExpressionWrapper, F, fields
 from . import serializers
 from . import models
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from dj_rest_auth.registration.views import SocialLoginView
 
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = "https://gympilot.danielin.xyz/login"
+    client_class = OAuth2Client
 
 # Create your views here.
 class ExerciseViewSet(viewsets.ModelViewSet):

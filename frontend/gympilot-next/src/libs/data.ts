@@ -128,6 +128,26 @@ type Credentials = {
   password: string;
 };
 
+export const googleLogin = async (code:string): Promise<boolean> => {
+
+  const response = await fetch(url + "/rest-auth/google/login", {
+    method: "POST",
+    credentials: "omit",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({code:code}),
+  });
+
+  if (!response.ok) {
+    throw new Error("Login error");
+  }
+
+  const data = await response.json();
+  localStorage.setItem("token", data.key);
+  return data.key !== "";
+};
+
 export const login = async (credentials: Credentials) => {
   const response = await fetch(url + "/rest-auth/login/", {
     method: "POST",
