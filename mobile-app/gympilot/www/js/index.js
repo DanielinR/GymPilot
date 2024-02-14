@@ -24,6 +24,6 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
     // Cordova is now initialized. Have fun!
-    var ref2 = cordova.InAppBrowser.open('https://gympilot.danielin.xyz/login', '_blank', 'location=no,zoom=no,beforeload=yes');
+    var ref2 = cordova.InAppBrowser.open('https://gympilot.danielin.xyz/login', '_blank', 'location=no,zoom=no,beforeload=no');
 }
 
