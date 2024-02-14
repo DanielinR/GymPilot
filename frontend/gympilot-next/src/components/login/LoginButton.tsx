@@ -37,7 +37,7 @@ export default function LoginButton({
       formAction={handleLogin}
       className="flex justify-center items-center bg-brand-500 hover:bg-brand-700 rounded-2xl p-3 shadow-sm shadow-brand-500"
     >
-      {!loading && <ArrowIcon className="w-16 h-16 sm:h-20 sm:w-20 text-white"></ArrowIcon>}
+      {!loading && <ArrowIcon className="w-14 h-14 sm:h-20 sm:w-20 text-white"></ArrowIcon>}
       {loading && <ClipLoader color="white" size={64}></ClipLoader>}
 
     </button>

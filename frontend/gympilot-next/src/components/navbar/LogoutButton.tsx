@@ -19,7 +19,7 @@ export default function LogoutButton() {
   return (
     <button onClick={handleLogout}>
       <LogOutIcon
-        className="bg-neutral-700 h-12 w-12 rounded-full p-2 hover:bg-color-primary-strong text-color-font hover:bg-neutral-900 shadow-sm"
+        className="bg-neutral-600 h-12 w-12 rounded-full p-2 hover:bg-color-primary-strong text-color-font hover:bg-neutral-900 shadow-sm"
       ></LogOutIcon>
     </button>
   );
