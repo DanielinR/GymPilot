@@ -5,11 +5,16 @@ import InfoCard from "@/components/Home/InfoCard";
 import MyCalendar from "@/components/calendar/MyCalendar";
 import CalendarIcon from "@/components/svg/CalendarIcon";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [selectedDate, setSelectedDate] = useState<Date>();
-  const actualTrainingText = localStorage.getItem('actualTraining')
+  const [actualTrainingText, setActualTrainingText] = useState<string|null>();
+  useEffect(()=>{
+    setActualTrainingText(localStorage.getItem('actualTraining'))
+  },[
+    
+  ])
 
   return (
     <div className="w-full h-full flex items-center justify-center">
