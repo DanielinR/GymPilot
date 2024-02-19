@@ -9,6 +9,8 @@ import { useState } from "react";
 
 export default function HomePage() {
   const [selectedDate, setSelectedDate] = useState<Date>();
+  const actualTrainingText = localStorage.getItem('actualTraining')
+
   return (
     <div className="w-full h-full flex items-center justify-center">
       <div className="max-w-[88rem] w-full h-full grid grid-rows-[7fr_2fr_3fr] lg:grid-rows-[3fr_1fr] lg:grid-cols-2 xl:grid-rows-4 xl:grid-cols-[3fr_1fr_1fr] gap-8 p-8 pt-2 md:pt-5">
@@ -23,7 +25,7 @@ export default function HomePage() {
         </div>
         <DayInfo date={selectedDate}></DayInfo>
         <Link href={"/createTraining"} className="shadowText bg-brand-500 hover:bg-brand-700 flex items-center justify-center py-5 px-8 rounded-xl text-center text-white text-4xl lg:text-5xl font-extrabold shadow-lg shadow-brand lg:col-start-2 lg:col-end-4 lg:m-0 lg:mb-0 mb-10 m-5">
-          <h2>TRAIN</h2>
+          {!actualTrainingText ? <h2>TRAIN</h2> : <h2 className="text-3xl">CONTINUE TRAINING</h2>}
         </Link>
       </div>
     </div>

@@ -70,6 +70,26 @@ export function TrainingProvider({ children }: { children: ReactNode }) {
     deleteTemplateFilter();
   }, [actualExercise, template, phase, pathname, router,searchParams]);
 
+  useEffect(()=>{
+    if(template || (exercises && exercises.length > 0)){
+      localStorage.setItem('actualTraining', JSON.stringify({template: template, exercises: exercises}));
+    }
+  },[exercises,template])
+
+  useEffect(()=>{
+    const actualTrainingText = localStorage.getItem('actualTraining')
+    if (!actualTrainingText) return
+
+    const actualTraining:{"exercises":ExerciseTrain[], "template":Template} = JSON.parse(actualTrainingText);
+    if (actualTraining.template){setTemplate(actualTraining.template)}
+    if (actualTraining.exercises && actualTraining.exercises.length > 0){
+      setExercises(actualTraining.exercises);
+      setPhasePrivate(phases.WatchActualTraining)
+    }else{
+      setPhasePrivate(phases.Exercises)
+    }
+  },[])
+
   const value = {
     phase,
     setPhase,
